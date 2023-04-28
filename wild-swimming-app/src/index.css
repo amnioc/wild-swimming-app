@@ -1,0 +1,9 @@
+:root {
+  background-color: rgb(234, 234, 234);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+}
