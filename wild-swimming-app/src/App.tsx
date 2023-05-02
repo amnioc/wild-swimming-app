@@ -1,7 +1,4 @@
-// import React from "react";
 import "./App.css";
-// import { Link } from "react-router-dom";
-// import Header from "./components/Header/Header";
 import RootLayout from "./components/RootLayout/RootLayout";
 import Homepage from "./pages/home/Homepage";
 import {
