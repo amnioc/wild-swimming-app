@@ -1,0 +1,37 @@
+.comment {
+  display: flex;
+  width: 100%;
+  border: 2px solid black;
+  margin: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.avatar {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.commentDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.dateVotes {
+  font-size: 12px;
+  font-style: bold;
+  color: grey;
+  margin: 10px 0px;
+}
+
+.commentBody {
+  margin-top: 10px;
+  font-size: 18px;
+}
+.commentVotes {
+  align-self: flex-end;
+}
