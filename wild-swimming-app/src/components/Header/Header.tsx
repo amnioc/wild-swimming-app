@@ -4,7 +4,7 @@ import LoginButton from "../loginbutton/loginbutton";
 import LogoutButton from "../logoutbutton/logoutbutton";
 
 const Header = () => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -27,9 +27,12 @@ const Header = () => {
         </li>
       </ul>
       <LoginButton />
-      {isAuthenticated && (
+      {user !== undefined && isAuthenticated && (
         <div>
           <p>You are logged in</p>
+          <img src={user.picture} alt={user.name} />
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
         </div>
       )}
       <LogoutButton />
