@@ -10,22 +10,33 @@ const Header = () => {
   }
   return (
     <div className="header">
-      <ul>
-        <li>
-          <a href="#home">Home</a>
-        </li>
-        <li>
-          <a href="#news">News</a>
-        </li>
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
-        <li className="about">
-          <a className="active" href="#about">
-            About
-          </a>
-        </li>
-      </ul>
+      <nav>
+        <ul>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#account">Account</a>
+          </li>
+          <li>
+            <a href="#contact">Contact Us</a>
+          </li>
+          <li>
+            <a href="#terms">Terms and Conditions</a>
+          </li>
+          <li className="about">
+            <a className="active" href="#about">
+              About
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div className="search-container">
+        <form>
+          <input type="text" placeholder="Search..." />
+          <button type="submit">Search</button>
+        </form>
+      </div>
       <LoginButton />
       {user !== undefined && isAuthenticated && (
         <div>
