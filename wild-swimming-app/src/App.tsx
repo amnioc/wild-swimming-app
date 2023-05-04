@@ -15,7 +15,7 @@ function App() {
         </Route>
 
         <Route path="terms" element={<TsCs />} />
-        <Route path="/location/:id" element={<LocationDetails />} />
+        <Route path="location/:id" element={<LocationDetails />} />
       </Routes>
     </section>
   );
