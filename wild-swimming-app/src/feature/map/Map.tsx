@@ -2,55 +2,77 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import React, { useState, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
-import { getSewage } from "./utils/riversTrustAPI";
-import useGeoLocation from "./utils/getUserLocation";
+import { getBathingWater } from "./utils/riversTrustAPI";
+import userGeoLocation from "./utils/getUserLocation";
+import { fetchPostCode } from "./utils/fetchPostCode";
+import { markerIcon, userIcon, bathingIcon } from "./mapIcons";
+import stormOverflow2022 from "./Data/stormOverflow2022.json";
 
-//import { fetchPostcodes } from "./utils/api";
 const Map = () => {
+  //Map Initialisation
   const [center, setCenter] = useState({
     lat: 51.5095146286,
     lng: -0.1244828354,
   });
-  const ZOOM_LEVEL = 9;
+  const ZOOM_LEVEL = 14;
   const mapRef = useRef();
 
-  const markerIcon = new L.Icon({
-    iconUrl:
-      "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-1024.png",
-    iconSize: [40, 40],
-    iconAnchor: [17, 46],
-    popupAnchor: [0, -46],
-  });
+  //Geolocation
 
-  const userIcon = new L.Icon({
-    iconUrl: "https://img.icons8.com/?size=512&id=48096&format=png",
-    iconSize: [40, 40],
-    iconAnchor: [17, 46],
-    popupAnchor: [0, -46],
-  });
-
-  const location = useGeoLocation();
+  const userLocation = userGeoLocation();
   const showMyLocation = () => {
-    console.log(location);
-    if (location.loaded) {
-      console.log(location);
-      console.log(mapRef);
+    if (userLocation.loaded) {
       mapRef.current.flyTo(
-        [location.coordinates.lat, location.coordinates.lng],
+        [userLocation.coordinates.lat, userLocation.coordinates.lng],
         ZOOM_LEVEL,
         { animate: true }
       );
     }
   };
 
-  const [filteredMarkers, setFilteredMarkers] = useState([]);
-  getSewage().then((data) => {
-    const mapData = data.data.features;
-    // console.log(mapData);
-    const removeNullGeo = mapData.filter((mark: any) => mark.geometry !== null);
-    const filteredMarkers = removeNullGeo.slice(0, 250); // changes number of markers ploted on map
-    setFilteredMarkers(filteredMarkers);
+  //Postcode
+
+  const [postcode, setPostcodeList] = useState();
+  const postcodeLocation = fetchPostCode(postcode);
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    fetchPostCode(postcode).then((postcodeLocation) => {
+      if (postcodeLocation.loaded) {
+        mapRef.current.flyTo(
+          [postcodeLocation.coordinates.lat, postcodeLocation.coordinates.lng],
+          ZOOM_LEVEL,
+          { animate: true }
+        );
+      }
+    });
+  };
+
+  // Storm overflow Sewage
+
+  // const [filteredSewage, setFilteredSewage] = useState([]);
+  // getSewage().then((data) => {
+  //   const mapData = data.data.features;
+  //   const removeNullGeo = mapData.filter((mark: any) => mark.geometry !== null);
+  //   const filteredSewage = removeNullGeo.slice(0, 200); // changes number of markers ploted on map
+  //   setFilteredSewage(filteredSewage);
+  // });
+
+  // const [filteredSewage, setFilteredSewage] = useState([]);
+
+  const filteredSewage = stormOverflow2022.filter(
+    (mark: any) => mark.geometry !== null
+  );
+
+  // Bathing Water
+
+  const [filteredBathing, setFilteredBathing] = useState([]);
+  getBathingWater().then((data) => {
+    const filteredBathing = data.data.features;
+
+    setFilteredBathing(filteredBathing);
   });
 
   return (
@@ -75,30 +97,73 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {filteredMarkers.map((marker: any) => (
+          <MarkerClusterGroup disableClusteringAtZoom={14}>
+            {filteredSewage.map((marker: any) => (
+              <Marker
+                key={marker.properties.OBJECTID}
+                position={[
+                  marker.geometry.coordinates[1],
+                  marker.geometry.coordinates[0],
+                ]}
+                icon={markerIcon}
+              >
+                <Popup>
+                  Water Company: {marker.properties.waterCompanyName}
+                  Storm Overflow Duration:{" "}
+                  {marker.properties.totalDurationAllSpillsHrs} hours
+                </Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
+
+          {filteredBathing.map((marker: any) => (
             <Marker
-              key={marker.properties.OBJECTID}
+              key={marker.properties.objectid}
               position={[
                 marker.geometry.coordinates[1],
                 marker.geometry.coordinates[0],
               ]}
-              icon={markerIcon}
+              icon={bathingIcon}
             >
               <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
+                Site Name: {marker.properties.site_name}
+                <br />
+                Description: {marker.properties.description}
               </Popup>
             </Marker>
           ))}
 
           <Marker
             icon={userIcon}
-            position={[location.coordinates.lat, location.coordinates.lng]}
+            position={[
+              userLocation.coordinates.lat,
+              userLocation.coordinates.lng,
+            ]}
           ></Marker>
         </MapContainer>
         <div>
           <button onClick={showMyLocation}>Locate Me</button>
         </div>
       </body>
+
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            <p>Search by postcode</p>
+            <input
+              type="text"
+              required
+              value={postcode}
+              onChange={(event) => setPostcodeList(event.target.value)}
+            />
+          </label>
+
+          <br></br>
+          <button className="button" type="submit">
+            submit!
+          </button>
+        </form>
+      </div>
     </>
   );
 };
