@@ -26,13 +26,10 @@ li a {
 .about {
   float: right;
 } */
-
+/* 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-}
+
+} */
 
 nav {
   display: flex;
@@ -78,4 +75,28 @@ button[type="submit"]:hover {
   background-color: #3e8e41;
 }
 
+.width-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(66, 128, 244);
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
 
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-left: 80px;
+}
+
+.nav-listitem {
+  cursor: pointer;
+  color: white;
+}
+
+.nav-listitem:hover {
+  color: rgb(0, 7, 10);
+}
