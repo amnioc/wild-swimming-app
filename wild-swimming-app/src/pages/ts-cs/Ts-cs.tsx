@@ -1,5 +1,6 @@
 import Header from "../../components/Header/Header";
 import styles from "./ts-cs.module.css";
+import Footer from "../../feature/footer/Footer";
 const TsCs = () => {
   return (
     <div>
@@ -109,6 +110,7 @@ const TsCs = () => {
           work to do.
         </p>
       </section>
+      <Footer />
     </div>
   );
 };

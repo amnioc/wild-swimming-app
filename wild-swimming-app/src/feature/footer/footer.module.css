@@ -1,0 +1,64 @@
+.container {
+  height: 100%;
+  background-color: #4280f4;
+}
+
+.innercontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.slogan {
+  margin-top: 1rem;
+  color: chartreuse;
+}
+
+.linkheading {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding-left: 10px;
+}
+
+.linkcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-bottom: 4rem;
+  /* margin-top: 0.5rem; */
+  /* max-width: 50px; */
+}
+
+.linkitem {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: white;
+  border-color: transparent;
+  border-bottom-width: 4px;
+}
+
+.linkitem:hover {
+  border-color: rgb(237, 240, 234);
+  color: white;
+}
+
+.contactcontainer {
+  margin-top: 1rem;
+}
+
+.contactheading {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.contactaddress {
+  margin-top: 0.5rem;
+}
