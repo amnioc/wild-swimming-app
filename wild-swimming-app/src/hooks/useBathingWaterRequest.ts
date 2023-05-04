@@ -79,7 +79,7 @@ const useBathingWaterRequest = (): ReturnType => {
         locationData.name = result.bathingWater.name._value;
         locationData.riskForcastDetails =
           result.pollutionRiskForecastStatement._value;
-        locationData.riskForecast = result.pollutionRiskForecasting._value;
+        locationData.riskForecast = !result.pollutionRiskForecasting._value;
         locationData.riverDetails = result.streamsRiversStatement._value;
         locationData.stormOverflowDetails = result.esoOutfallsStatement._value;
         locationData.visiblePollution = result.visiblePollutionStatement._value;
@@ -97,8 +97,13 @@ const useBathingWaterRequest = (): ReturnType => {
           setErrorMsg(
             err.message || "Oops, something went wrong. Please try again!"
           );
+
+          setIsLoading(false);
+          return;
         }
       }
+
+      setIsLoading(false);
     },
     []
   );
