@@ -1,9 +1,29 @@
 :root {
-  background-color: rgb(234, 234, 234);
+  --primary-theme-colour: #9bc4cb;
+  --secondary-theme-color: #dbefbc;
+
+  --highlight-color: #e2fadb;
+  --compliment-color: #5f634f;
+
+  --border: solid 0.2rem black;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.4rem var(--primary-theme-colour);
+}
+
+html {
+  font-size: 62.5%;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+  background-color: rgb(234, 234, 234);
+  font-size: 1.6rem;
 }

@@ -1,0 +1,30 @@
+.Container {
+  height: auto;
+  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: var(--border);
+
+  padding: 1rem 0;
+}
+
+.Filter {
+  height: 5.2rem;
+  width: 90%;
+
+  padding: 1.2rem 1rem;
+
+  background-color: var(--tertiary-theme-color);
+
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  padding: 0.4rem;
+
+  font-family: inherit;
+}
