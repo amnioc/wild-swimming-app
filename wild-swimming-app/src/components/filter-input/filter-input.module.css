@@ -36,7 +36,7 @@
   top: 3rem;
   z-index: 5;
 
-  background-color: var(--primary-theme-colour);
+  background-color: var(--primary-theme-color);
 
   scrollbar-width: none;
 }
