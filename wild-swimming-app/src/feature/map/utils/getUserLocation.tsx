@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-const useGeoLocation = () => {
-  const [location, setLocation] = useState({
+const userGeoLocation = () => {
+  const [userLocation, setUserLocation] = useState({
     loaded: false,
     coordinates: { lat: 0, lng: 0 },
   });
 
   const onSuccess = (location) => {
-    setLocation({
+    setUserLocation({
       loaded: true,
       coordinates: {
         lat: location.coords.latitude,
@@ -37,7 +37,7 @@ const useGeoLocation = () => {
     navigator.geolocation.getCurrentPosition(onSuccess);
   }, []);
 
-  return location;
+  return userLocation;
 };
 
-export default useGeoLocation;
+export default userGeoLocation;
