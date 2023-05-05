@@ -52,12 +52,13 @@ const Filter = () => {
     };
 
     // TODO Hardcoded coords - string needs to change to template literal!
-    sendBathingWaterRequest(
-      "GET",
-      `https://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.long=-3.231360&max-samplingPoint.long=-1.926734&min-samplingPoint.lat=53.075973&max-samplingPoint.lat=53.664265`,
-      res
-    );
-  }, [sendBathingWaterRequest]);
+       sendBathingWaterRequest(
+        "GET",
+         `https://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.long=-3.231360&max-samplingPoint.long=-1.926734&min-samplingPoint.lat=53.075973&max-samplingPoint.lat=53.664265`,
+        res
+     );
+    }, [sendBathingWaterRequest]);
+
 
   return (
     <section className={styles.Container}>
