@@ -8,12 +8,17 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import { getBathingWater } from "./utils/riversTrustAPI";
 import userGeoLocation from "./utils/getUserLocation";
 import getBounds from "./utils/getBounds";
-import { fetchPostCode } from "./utils/fetchPostCode";
+import { checkValidPostocde, fetchPostCode } from "./utils/fetchPostCode";
 import { markerIcon, userIcon, bathingIcon } from "./mapIcons";
 import stormOverflow2022 from "./Data/stormOverflow2022.json";
 import BathingWaterData from "../../hooks/useBathingWaterRequest";
+import { error } from "console";
 
 const Map = () => {
+
+  const [err, setErr] = useState();
+  const[message, setMessage]= useState("");
+
   //Map Initialisation
   const [center, setCenter] = useState({
     lat: 51.5095146286,
@@ -25,6 +30,8 @@ const Map = () => {
   // get bounding box
 
   const [bounds, setBounds] = useState();
+
+
   const getBounds = () => {
     const bounds = mapRef.current.getBounds();
     const boundsLocation = getBathingWater(bounds);
@@ -33,7 +40,7 @@ const Map = () => {
   };
 
   //Geolocation
-
+ 
   const userLocation = userGeoLocation();
   const showMyLocation = () => {
     if (userLocation.loaded) {
@@ -47,22 +54,40 @@ const Map = () => {
 
   //Postcode
 
-  const [postcode, setPostcodeList] = useState();
-  const postcodeLocation = fetchPostCode(postcode);
+  const [postcode, setPostcodeList] = useState("");
+  const[isPostcodeValid, setIsPostcodeValid]= useState();
+  // const postcodeLocation = fetchPostCode(postcode);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    fetchPostCode(postcode).then((postcodeLocation) => {
-      if (postcodeLocation.loaded) {
+  
+    checkValidPostocde(postcode).then((result)=>{
+      setIsPostcodeValid(result);
+      if(isPostcodeValid=== false){
+        setMessage("Postcode can not be found, Please enter a valid Postocde")
+      }
+    })
+    if (isPostcodeValid === true){
+  fetchPostCode(postcode).then((currentPostcode) => {
+   
+      if (currentPostcode.loaded) {
         mapRef.current.flyTo(
-          [postcodeLocation.coordinates.lat, postcodeLocation.coordinates.lng],
+          [currentPostcode.coordinates.lat, currentPostcode.coordinates.lng],
           ZOOM_LEVEL,
           { animate: true }
-        );
-      }
-    });
+        )
+      } 
+    })
+    setMessage("");
+  }
+  // }if (isPostcodeValid === false ){
+  //   setMessage("Postcode can not be found, Please enter a valid Postocde")
+  // }
+  
+  setPostcodeList("");
+ 
   };
-
+ 
   // Storm overflow Sewage
 
   const filteredSewage = stormOverflow2022.filter(
@@ -169,6 +194,8 @@ const Map = () => {
           <button className="button" type="submit">
             submit!
           </button>
+          {err ? <p>{err}</p> :null}
+        {!err ? <p>{message}</p> :null}
         </form>
       </div>
     </>
