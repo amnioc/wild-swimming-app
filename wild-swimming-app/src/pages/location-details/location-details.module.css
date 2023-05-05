@@ -1,0 +1,87 @@
+.Location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  padding: 2rem;
+}
+
+.DetailsSection {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.ImgBox {
+  height: 30rem;
+  width: 30rem;
+
+  margin-bottom: 1rem;
+
+  overflow: hidden;
+
+  border: var(--border);
+
+  filter: drop-shadow(10px 9px 0px var(--primary-theme-color));
+}
+
+.Img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.LocalAuthority {
+  align-self: flex-start;
+}
+
+.Details {
+  width: 100%;
+
+  border: var(--border);
+  padding: 1rem;
+
+  align-self: flex-start;
+
+  cursor: pointer;
+}
+
+details {
+  background-color: var(--primary-theme-color);
+}
+
+p {
+  margin-top: 1rem;
+}
+
+.Risk_Summary {
+  width: 100%;
+
+  margin-top: -1.8rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 2rem;
+}
+
+.Risk_Summary_alert {
+  height: 2rem;
+  width: 2rem;
+
+  border-radius: 50%;
+  border: var(--border);
+}
+
+.Risk_Summary_alert__false {
+  background-color: green;
+}
+
+.Risk_Summary_alert__true {
+  background-color: red;
+}

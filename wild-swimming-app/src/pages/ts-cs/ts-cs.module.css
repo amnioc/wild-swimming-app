@@ -1,0 +1,6 @@
+.ul {
+  color: rgb(2, 0, 0);
+  display: block;
+  list-style-type: square;
+  padding-left: 50px;
+}

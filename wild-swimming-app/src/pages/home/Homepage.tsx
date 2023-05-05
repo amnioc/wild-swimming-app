@@ -4,6 +4,7 @@ const Homepage = () => {
   return (
     <section>
       <Header />
+      <p>Homepage</p>
     </section>
   );
 };
