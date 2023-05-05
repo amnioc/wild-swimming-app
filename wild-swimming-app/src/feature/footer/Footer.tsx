@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className={styles.container}>
       <div className={styles.innercontainer}>
-        <div>
+        <div className={styles.logocontainer}>
           <img src="" alt="Splash logo" width="50rem" />
           <p className={styles.slogan}>
             Splash places<br></br> to swim
@@ -14,7 +14,7 @@ const Footer = () => {
           <h4 className={styles.linkheading}>Link</h4>
           <div className={styles.linkcontainer}>
             <ul>
-              <li>
+              <li className={styles.linkitemli}>
                 <Link to="/" className={styles.linkitem}>
                   Home
                 </Link>
@@ -26,7 +26,7 @@ const Footer = () => {
               </li>
             </ul>
             <ul className={styles.linkitemul}>
-              <li>
+              <li className={styles.linkitemli}>
                 <Link to="/contact" className={styles.linkitem}>
                   Contact Us
                 </Link>
@@ -38,7 +38,7 @@ const Footer = () => {
               </li>
             </ul>
             <ul className={styles.linkitemul}>
-              <li>
+              <li className={styles.linkitemli}>
                 <Link to="/terms" className={styles.linkitem}>
                   Terms and Conditions
                 </Link>

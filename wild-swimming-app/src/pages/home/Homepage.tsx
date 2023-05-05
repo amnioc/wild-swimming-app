@@ -1,12 +1,13 @@
 import Header from "../../components/Header/Header";
 import Footer from "../../feature/footer/Footer";
-import homepage from "./Homepage.png";
-
+// import homepage from "./Homepage.png";
+// import styles from "./homepage.module.css";
+import Herosection from "../../feature/herosection/Herosection";
 const Homepage = () => {
   return (
     <section>
       <Header />
-      <img src={homepage} width="2000px" height="1000px" alt="Homepage" />
+     <Herosection />
       <Footer />
     </section>
   );

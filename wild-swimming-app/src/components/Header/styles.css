@@ -30,6 +30,12 @@ li a {
 .header {
 
 } */
+.logo-hamburger-container {
+  display: flex;
+}
+.logo-img {
+  display: block;
+}
 
 nav {
   display: flex;
@@ -86,17 +92,74 @@ button[type="submit"]:hover {
 }
 
 .nav-container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  padding-left: 80px;
+  display: none;
 }
 
 .nav-listitem {
   cursor: pointer;
   color: white;
+  text-decoration: none;
 }
 
 .nav-listitem:hover {
   color: rgb(0, 7, 10);
+}
+.hamburgericon {
+  display: flex;
+  padding-right: 2rem;
+  align-items: center;
+  padding-left: 2rem;
+}
+.hamburgersvg:hover {
+  fill: #dd3ab7;
+}
+.showMenu {
+  position: absolute;
+  top: 8rem;
+  left: 6%;
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  border: 1px solid black;
+  z-index: 9;
+}
+.showMenu .menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+  padding: 3.6rem 0;
+}
+.showMenu .menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+}
+.hideMenu {
+  display: none;
+}
+.ham-listitem {
+  cursor: pointer;
+  color: rgb(241, 74, 3);
+  text-decoration: none;
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-left: 80px;
+  }
+  .logo-img {
+    display: block;
+  }
+  .hamburgericon {
+    display: none;
+  }
 }

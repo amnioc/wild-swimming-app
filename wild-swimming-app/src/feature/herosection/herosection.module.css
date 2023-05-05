@@ -1,0 +1,36 @@
+.herosectioncontainer {
+  position: relative;
+}
+
+.heroimage {
+  height: 60rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: url("./Homepage.png");
+}
+.herotextsection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+}
+.h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: white;
+}
+
+.searchbutton {
+  display: inline-block;
+  color:skyblue;
+  margin-top: 5rem;
+  padding: 1rem 2rem;
+}
+.searchbutton:hover {
+  background-color: #dd3ab7;
+  color: white;
+}
