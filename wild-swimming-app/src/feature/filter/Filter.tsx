@@ -9,7 +9,8 @@ type ResponseT<T> = {
   locations: Array<T>;
 };
 
-const Filter = () => {
+const Filter = (bounds) => {
+  console.log(bounds);
   const [locations, setLocations] = useState<Array<LocationT>>();
   const [filteredLocations, setFilteredLocations] =
     useState<Array<LocationT>>();
@@ -19,7 +20,7 @@ const Filter = () => {
   const waterCompanyValue = useRef<HTMLInputElement>(null);
   const locationValue = useRef<HTMLInputElement>(null);
 
-  const { sendRequest } = useBathingWaterRequest();
+  const { sendBathingWaterRequest } = useBathingWaterRequest();
 
   // this function should be moved to somewhere where
   // it can be use by the map to generate flags based on
@@ -52,12 +53,19 @@ const Filter = () => {
     };
 
     // TODO Hardcoded coords - string needs to change to template literal!
-    sendRequest(
+    //   sendBathingWaterRequest(
+    //     "GET",
+    //     `https://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.long=-3.231360&max-samplingPoint.long=-1.926734&min-samplingPoint.lat=53.075973&max-samplingPoint.lat=53.664265`,
+    //     res
+    //   );
+    // }, [sendBathingWaterRequest]);
+
+    sendBathingWaterRequest(
       "GET",
-      `https://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.long=-3.231360&max-samplingPoint.long=-1.926734&min-samplingPoint.lat=53.075973&max-samplingPoint.lat=53.664265`,
+      `https://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.long=${bounds._northEast.lng}&max-samplingPoint.long=${bounds._southWest.lng}&min-samplingPoint.lat=${bounds._northEast.lat}&max-samplingPoint.lat=${bounds._northEast.lat}`,
       res
     );
-  }, [sendRequest]);
+  }, [sendBathingWaterRequest]);
 
   return (
     <section className={styles.Container}>
