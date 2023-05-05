@@ -79,12 +79,13 @@ const Map = () => {
       } 
     })
     setMessage("");
+    setPostcodeList("");
   }
   // }if (isPostcodeValid === false ){
   //   setMessage("Postcode can not be found, Please enter a valid Postocde")
   // }
   
-  setPostcodeList("");
+
  
   };
  

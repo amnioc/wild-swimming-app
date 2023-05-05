@@ -6,6 +6,7 @@ import logo from "./logo.png";
 
 const Header = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+
   const handleGoToHome = () => {
     window.location.replace("/");
   };
