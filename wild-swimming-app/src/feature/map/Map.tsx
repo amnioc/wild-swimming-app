@@ -13,7 +13,7 @@ import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
 import userGeoLocation from "./utils/getUserLocation";
-import { fetchPostCode } from "./utils/fetchPostCode";
+import { checkValidPostocde, fetchPostCode } from "./utils/fetchPostCode";
 import { markerIcon, userIcon, bathingIcon } from "./mapIcons";
 import stormOverflow2022 from "./Data/stormOverflow2022.json";
 import useBathingWaterRequest from "../../hooks/useBathingWaterRequest";
@@ -163,6 +163,41 @@ const Map = () => {
   //   });
   // };
 
+  // }if (isPostcodeValid === false ){
+  //   setMessage("Postcode can not be found, Please enter a valid Postocde")
+  // }
+  const [err, setErr] = useState();
+  const[message, setMessage]= useState("");
+  const[isPostcodeValid, setIsPostcodeValid]=useState()
+  const[postcode,  setPostcodeList] = useState("")
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    checkValidPostocde (postcode).then((result)=>{
+      setIsPostcodeValid(result);
+      if(isPostcodeValid === false){
+        setMessage("Postcode can not be found, Please enter a valid Postocde")
+      }
+    })
+    if (isPostcodeValid === true){
+  fetchPostCode(postcode).then((currentPostcode) => {
+      if (currentPostcode.loaded) {
+        mapRef.current.flyTo(
+          [currentPostcode.coordinates.lat, currentPostcode.coordinates.lng],
+          ZOOM_LEVEL,
+          { animate: true }
+        )
+      }
+      
+    })
+    }
+    setMessage("");
+      setPostcodeList("");
+  }
+  
+   
+    
+
   const handlePopUpClick = (id: any) => {
     navigate(`/location/${id}`);
   };
@@ -270,7 +305,7 @@ const Map = () => {
         </div>
       </div>
 
-      {/* <div>
+      <div>
         <form onSubmit={handleSubmit}>
           <label>
             <p>Search by postcode</p>
@@ -286,10 +321,14 @@ const Map = () => {
           <button className="button" type="submit">
             submit!
           </button>
+          {err? <p>{err}</p> :null}
+          {!err ? <p>{message}</p> :null}
         </form>
-      </div> */}
+      </div>
     </>
   );
 };
+
+
 export default Map;
 
