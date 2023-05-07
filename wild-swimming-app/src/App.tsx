@@ -7,6 +7,9 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+const { user, isAuthenticated, isLoading } = useAuth0();
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
