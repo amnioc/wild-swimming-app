@@ -8,7 +8,7 @@ const Herosection = () => {
         <div className={styles.heroimage}></div>
         <div className={styles.herotextsection}>
           <h1 className={styles.h1}>Find Perfect Place To Swim</h1>
-
+          <br />
           <Link to="/" className={styles.searchbutton}>
             SEARCH NOW
           </Link>
