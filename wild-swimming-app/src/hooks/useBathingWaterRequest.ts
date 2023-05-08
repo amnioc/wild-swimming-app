@@ -67,22 +67,23 @@ const useBathingWaterRequest = (): ReturnType => {
 
         const locationData = {} as LocationDetailsT;
 
-        locationData.country = result.bathingWater.country.name._value;
-        locationData.county = result.countyName._value;
-        locationData.historyDetails = result.historyStatement._value;
-        locationData.img = result.webResImage;
-        locationData.lat = result.bathingWater.samplingPoint.lat;
-        locationData.long = result.bathingWater.samplingPoint.long;
-        locationData.localAuthority = result.localAuthority.label[0]._value;
+        locationData.country = result.bathingWater.country.name?._value;
+        locationData.county = result.countyName?._value;
+        locationData.historyDetails = result.historyStatement?._value;
+        locationData.img = result?.webResImage;
+        locationData.lat = result.bathingWater.samplingPoint?.lat;
+        locationData.long = result.bathingWater.samplingPoint?.long;
+        locationData.localAuthority = result.localAuthority.label[0]?._value;
         locationData.locationDescription =
-          result.bathingWaterDescription._value;
-        locationData.name = result.bathingWater.name._value;
+          result.bathingWaterDescription?._value;
+        locationData.name = result.bathingWater.name?._value;
         locationData.riskForcastDetails =
-          result.pollutionRiskForecastStatement._value;
-        locationData.riskForecast = result.pollutionRiskForecasting._value;
-        locationData.riverDetails = result.streamsRiversStatement._value;
-        locationData.stormOverflowDetails = result.esoOutfallsStatement._value;
-        locationData.visiblePollution = result.visiblePollutionStatement._value;
+          result.pollutionRiskForecastStatement?._value;
+        locationData.riskForecast = !result.pollutionRiskForecasting?._value;
+        locationData.riverDetails = result.streamsRiversStatement?._value;
+        locationData.stormOverflowDetails = result.esoOutfallsStatement?._value;
+        locationData.visiblePollution =
+          result.visiblePollutionStatement?._value;
 
         formattedResult.push(locationData);
 
@@ -92,13 +93,19 @@ const useBathingWaterRequest = (): ReturnType => {
 
         fn(finalResult);
       } catch (err: unknown) {
+        console.log(err);
         setIsError(true);
         if (err instanceof AxiosError) {
           setErrorMsg(
             err.message || "Oops, something went wrong. Please try again!"
           );
+
+          setIsLoading(false);
+          return;
         }
       }
+
+      setIsLoading(false);
     },
     []
   );
@@ -131,7 +138,7 @@ const useBathingWaterRequest = (): ReturnType => {
           const locationData = {} as LocationT;
 
           locationData.latestAssessmentGrade =
-            item.latestComplianceAssessment.complianceClassification.name._value;
+            item.latestComplianceAssessment?.complianceClassification.name._value;
 
           locationData.location = item.name._value;
 
@@ -174,6 +181,7 @@ const useBathingWaterRequest = (): ReturnType => {
 
         fn(finalResult);
       } catch (err: unknown) {
+        console.log(err);
         setIsError(true);
         if (err instanceof AxiosError) {
           setErrorMsg(
