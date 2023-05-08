@@ -14,7 +14,8 @@ const LocationDetails = () => {
 
   const { id } = useParams();
 
-  const { sendLocationRequest } = useBathingWaterRequest();
+  const { sendLocationRequest, isLoading, isError, errorMsg } =
+    useBathingWaterRequest();
 
   useEffect(() => {
     const res = (data: LocationResponseT<LocationDetailsT>) => {
@@ -28,32 +29,94 @@ const LocationDetails = () => {
     );
   }, [sendLocationRequest, id]);
 
-  console.log(location);
-
   return (
     <section className={styles.Location}>
-      <h2>{location?.name}</h2>
-      <h4>{location?.county}</h4>
-      <h4>{location?.country}</h4>
-      <img
-        className={styles.Img}
-        src={location?.img}
-        alt={`image of ${location?.name} bathing water site`}
-      />
-      <span>Local Authority: {location?.localAuthority}</span>
-      <h3>About</h3>
-      <p>{location?.locationDescription}</p>
-      <h3>Details</h3>
-      <p>{location?.riverDetails}</p>
-      <h3>Storm Overflow</h3>
-      <p>{location?.stormOverflowDetails}</p>
-      <h3>History</h3>
-      <p>{location?.historyDetails}</p>
-      <h3>Risk</h3>
-      <span>{location?.riskForecast}</span>
-      <p>{location?.riskForcastDetails}</p>
-      <h3>Visible Pollution</h3>
-      <p>{location?.visiblePollution}</p>
+      {isError && <span>{errorMsg}</span>}
+
+      {isLoading && <span>Loading...</span>}
+
+      {!isLoading && !isError && (
+        <>
+          <h2>{location?.name}</h2>
+          <h4>
+            {location?.county}, {location?.country}
+          </h4>
+
+          <div className={styles.ImgBox}>
+            <img
+              className={styles.Img}
+              src={location?.img}
+              alt={`image of ${location?.name} bathing water site`}
+            />
+          </div>
+
+          <section className={styles.DetailsSection}>
+            <span className={styles.LocalAuthority}>
+              Local Authority: {location?.localAuthority}
+            </span>
+
+            <details className={styles.Details}>
+              <summary>About</summary>
+              <p>
+                {location?.locationDescription ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
+
+            <details className={styles.Details}>
+              <summary>Details</summary>
+              <p>
+                {location?.riverDetails || "No information available, sorry!"}
+              </p>
+            </details>
+
+            <details className={styles.Details}>
+              <summary>Storm Overflow</summary>
+              <p>
+                {location?.stormOverflowDetails ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
+
+            <details className={styles.Details}>
+              <summary>Treatment History</summary>
+              <p>
+                {location?.historyDetails || "No information available, sorry!"}
+              </p>
+            </details>
+
+            <details className={styles.Details}>
+              <summary>
+                <div className={styles.Risk_Summary}>
+                  <span>Risk</span>
+                  <span
+                    className={`${styles.Risk_Summary_alert} ${
+                      location?.riskForecast
+                        ? styles.Risk_Summary_alert__true
+                        : styles.Risk_Summary_alert__false
+                    }`}
+                  ></span>
+                </div>
+              </summary>
+
+              <p>
+                {location?.riskForcastDetails ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
+
+            <details className={styles.Details}>
+              <summary>Visible Pollution</summary>
+              <p>
+                {location?.visiblePollution ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
+          </section>
+        </>
+      )}
+
+      {/*TODO add a comments feature, which holds the comment cards*/}
     </section>
   );
 };

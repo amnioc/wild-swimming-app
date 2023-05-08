@@ -3,3 +3,10 @@ body,
 html {
   font-family: "Lato", sans-serif;
 }
+
+.leaflet-container {
+  padding: 10%;
+  margin: 20px;
+  width: 80vw;
+  height: 80vh;
+}

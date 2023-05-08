@@ -1,4 +1,5 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+
 import React, { useState, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -6,9 +7,11 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 
 import { getBathingWater } from "./utils/riversTrustAPI";
 import userGeoLocation from "./utils/getUserLocation";
+import getBounds from "./utils/getBounds";
 import { fetchPostCode } from "./utils/fetchPostCode";
 import { markerIcon, userIcon, bathingIcon } from "./mapIcons";
 import stormOverflow2022 from "./Data/stormOverflow2022.json";
+import BathingWaterData from "../../hooks/useBathingWaterRequest";
 
 const Map = () => {
   //Map Initialisation
@@ -18,6 +21,16 @@ const Map = () => {
   });
   const ZOOM_LEVEL = 14;
   const mapRef = useRef();
+
+  // get bounding box
+
+  const [bounds, setBounds] = useState();
+  const getBounds = () => {
+    const bounds = mapRef.current.getBounds();
+    const boundsLocation = getBathingWater(bounds);
+    // console.log(boundsLocation);
+    setBounds(bounds);
+  };
 
   //Geolocation
 
@@ -52,28 +65,19 @@ const Map = () => {
 
   // Storm overflow Sewage
 
-  // const [filteredSewage, setFilteredSewage] = useState([]);
-  // getSewage().then((data) => {
-  //   const mapData = data.data.features;
-  //   const removeNullGeo = mapData.filter((mark: any) => mark.geometry !== null);
-  //   const filteredSewage = removeNullGeo.slice(0, 200); // changes number of markers ploted on map
-  //   setFilteredSewage(filteredSewage);
-  // });
-
-  // const [filteredSewage, setFilteredSewage] = useState([]);
-
   const filteredSewage = stormOverflow2022.filter(
     (mark: any) => mark.geometry !== null
   );
 
   // Bathing Water
 
-  const [filteredBathing, setFilteredBathing] = useState([]);
-  getBathingWater().then((data) => {
-    const filteredBathing = data.data.features;
+  // const [filteredBathing, setFilteredBathing] = useState([]);
+  // getBathingWater().then((data) => {
+  //   // console.log(data);
+  //   const filteredBathing = data.data.features;
 
-    setFilteredBathing(filteredBathing);
-  });
+  //   setFilteredBathing(filteredBathing);
+  // });
 
   return (
     <>
@@ -116,7 +120,7 @@ const Map = () => {
             ))}
           </MarkerClusterGroup>
 
-          {filteredBathing.map((marker: any) => (
+          {/* {filteredBathing.map((marker: any) => (
             <Marker
               key={marker.properties.objectid}
               position={[
@@ -131,7 +135,7 @@ const Map = () => {
                 Description: {marker.properties.description}
               </Popup>
             </Marker>
-          ))}
+          ))} */}
 
           <Marker
             icon={userIcon}
@@ -143,6 +147,9 @@ const Map = () => {
         </MapContainer>
         <div>
           <button onClick={showMyLocation}>Locate Me</button>
+        </div>
+        <div>
+          <button onClick={getBounds}>get bounds</button>
         </div>
       </body>
 
