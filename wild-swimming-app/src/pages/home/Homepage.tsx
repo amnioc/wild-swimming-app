@@ -10,11 +10,14 @@ import homepage from "./Homepage.png";
 
 const Homepage = () => {
   return (
+    
     <section>
-      <Header />
-     <Herosection />
+      <Header/>
+    <Herosection/>
+      
+    
       <Map/>
-      <Footer />
+     
     </section>
   );
 };
