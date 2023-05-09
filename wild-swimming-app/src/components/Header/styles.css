@@ -110,6 +110,7 @@ button[type="submit"]:hover {
   padding-right: 2rem;
   align-items: center;
   padding-left: 2rem;
+  fill: white;
 }
 .hamburgersvg:hover {
   fill: #92357d;
@@ -149,6 +150,10 @@ button[type="submit"]:hover {
   color: rgb(241, 74, 3);
   text-decoration: none;
 }
+.logo-img {
+  display: block;
+  border-radius: 20px;
+}
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .nav-container {
@@ -157,12 +162,7 @@ button[type="submit"]:hover {
     flex-direction: row;
     padding-left: 80px;
   }
-  .logo-img {
-    display: block;
-    border-radius: 20px;
-  }
   .hamburgericon {
     display: none;
   }
-
 }
