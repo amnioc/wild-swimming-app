@@ -6,6 +6,7 @@ import { LocationDetailsT } from "../../types/types";
 import styles from "./location-details.module.css";
 import AddCommentForm from "../../components/add-comment-form/AddCommentForm";
 import { useAuth0 } from "@auth0/auth0-react";
+import Comments from "../../feature/comments/Comments";
 
 type LocationResponseT<T> = {
   location: Array<T>;
@@ -122,7 +123,8 @@ console.log(user)
       )}
 
       {/*TODO add a comments feature, which holds the comment cards*/}
-      <AddCommentForm/>
+      <AddCommentForm />
+      <Comments />
     </section>
   );
 };

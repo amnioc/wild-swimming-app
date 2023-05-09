@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import CommentCard from "../../components/comment-card/Comment-card";
 import styles from "./comments.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router";
+import { getCommentsByLocation } from "./utils/comments-utils";
 
-const Comments = (location_id) => {
+const Comments = () => {
   const [locationComments, setLocationComments] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const { user } = useAuth0();
-  const { location_id } = useSearchParams; // is this correct?
+  const { id } = useParams();
+  const location_id = id;
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,20 +22,15 @@ const Comments = (location_id) => {
   }, [location_id]);
 
   if (isLoading) {
-    {
-      err ? <h4>{err}</h4> : null;
-    }
     return <h4 className={styles.loadingMessage}>Comments Loading...</h4>;
   }
   //map comments
-
   return (
     <section className={styles.commentsSection}>
-      {/* <New Comment Form> */}
       <ul className={styles.commentsList}>
-        {currentComments.map((comment) => {
+        {locationComments.map((comment) => {
           return (
-            <section>
+            <section key={comment._id}>
               <CommentCard user={user} comment={comment} />
             </section>
           );

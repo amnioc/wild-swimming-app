@@ -1,37 +1,62 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styles from "./comment-card.module.css";
+import { patchCommentVotes } from "../../feature/comments/utils/comments-utils";
 
 interface commentProps {
   avatar: string;
-  username: string;
+  name: string;
   created_at: string;
   body: string;
   votes: number;
 }
 
-const CommentCard: FC<commentProps> = ({
-  avatar,
-  username,
-  created_at,
-  body,
-  votes,
-}) => {
+const CommentCard: FC<commentProps> = ({ comment, user }) => {
+  const [thisComment, setThisComment] = useState(comment);
+  const [commentVotes, setCommentVotes] = useState(`${comment.votes}`);
+
+  const [err, setErr] = useState(null);
+
+  const handleVoteClick = (event) => {
+    setThisComment((comment) => {
+      setErr(null);
+      event.currentTarget.disabled = true;
+      return { ...comment, votes: comment.votes + 1 };
+    });
+
+    patchCommentVotes(comment._id)
+      .then((votes) => {
+        setCommentVotes(votes);
+      })
+      .catch((err) => {
+        setErr("Oops! Something went wrong, please try again later.");
+        setThisComment((comment) => {
+          return { ...comment, votes: comment.votes - 1 };
+        });
+      });
+  };
+
   return (
     <article className={styles.comment}>
       <img
         className={styles.avatar}
-        src={avatar}
-        alt={`avatar for ${username}`}
+        src={
+          "https://images.unsplash.com/photo-1682685797741-f0213d24418c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+        }
+        alt={`avatar for ${comment.name}`}
       />
       <section className={styles.commentDetails}>
         <span className={styles.dateVotes}>
-          {created_at} . {votes} votes
+          {comment.created_at} . {comment.votes} votes
         </span>
-        {username}
-        <span className={styles.commentBody}>{body}</span>
+        {comment.name}
+        <span className={styles.commentBody}>{comment.body}</span>
       </section>
       <section className={styles.commentVotes}>
-        Agree? <button aria-label="like comment"> 👍</button>
+        Agree?{" "}
+        <button aria-label="like comment" onClick={handleVoteClick}>
+          {" "}
+          👍
+        </button>
       </section>
     </article>
   );
