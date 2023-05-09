@@ -18,6 +18,9 @@ const router = createBrowserRouter(
   )
 );
 
+import LocationDetails from "./pages/location-details/Location-details";
+import TsCs from "./pages/ts-cs/Ts-cs";
+
 function App() {
   return <RouterProvider router={router} />;
 }
