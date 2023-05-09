@@ -1,10 +1,9 @@
-import Header from "../../components/Header/Header";
+// import Header from "../../components/Header/Header";
 import styles from "./ts-cs.module.css";
-import Footer from "../../feature/footer/Footer";
+// import Footer from "../../feature/footer/Footer";
 const TsCs = () => {
   return (
     <div>
-      <Header />
       <section>
         <h1>Terms and Conditions</h1>
         <p>
@@ -110,7 +109,7 @@ const TsCs = () => {
           work to do.
         </p>
       </section>
-      <Footer />
+
     </div>
   );
 };
