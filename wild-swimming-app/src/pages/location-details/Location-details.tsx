@@ -4,6 +4,7 @@ import useBathingWaterRequest from "../../hooks/useBathingWaterRequest";
 import { LocationDetailsT } from "../../types/types";
 
 import styles from "./location-details.module.css";
+import AddCommentForm from "../../components/add-comment-form/AddCommentForm";
 
 type LocationResponseT<T> = {
   location: Array<T>;
@@ -117,6 +118,7 @@ const LocationDetails = () => {
       )}
 
       {/*TODO add a comments feature, which holds the comment cards*/}
+      <AddCommentForm/>
     </section>
   );
 };
