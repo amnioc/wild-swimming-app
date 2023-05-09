@@ -16,6 +16,7 @@ const[bodyMessage, setBodyMessage]= useState("")
 const [err, setErr] = useState("");
 const[commentsList, setCommentsList]= useState("");
 const[message, setMessage]= useState("");
+console.log(user);
 
 const handleSubmit = (event:any)=>{
   event.preventDefault();
