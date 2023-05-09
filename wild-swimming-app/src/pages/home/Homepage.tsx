@@ -8,7 +8,7 @@ const Homepage = () => {
       <Header />
       <img src={homepage} width="2000px" height="1000px" alt="Homepage" />
       <p>Homepage</p>
-      <Map/>
+      <Map />
     </section>
   );
 };
