@@ -18,19 +18,28 @@
   width: 60%;
 }
 .h1 {
+  display: inline-block;
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.5;
-  color: white;
+  padding: 1rem 2rem;
+
+  color: #000000;
+  background-color: #2aa7ac;
 }
 
 .searchbutton {
   display: inline-block;
-  color:skyblue;
+  color: #2aa7ac;
+  background-color: #000000;
   margin-top: 5rem;
   padding: 1rem 2rem;
+  border: 2px solid skyblue;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
 }
 .searchbutton:hover {
-  background-color: #dd3ab7;
-  color: white;
+  background-color: #30952e;
+  color: #0f0f0f;
 }
