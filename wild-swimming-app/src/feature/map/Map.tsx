@@ -8,7 +8,7 @@ import {
 
 import styles from "./map.module.css";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, SetStateAction } from "react";
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
@@ -19,11 +19,14 @@ import stormOverflow2022 from "./Data/stormOverflow2022.json";
 import useBathingWaterRequest from "../../hooks/useBathingWaterRequest";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { LocationT } from "../../types/types";
+
+// TODO Fix all type errors
 
 type Props = {
-  setFilteredInlandLocations: Function;
-  setFilteredCoastalLocations: Function;
-  setFilteredSewageLocations: Function;
+  setFilteredInlandLocations: SetStateAction<[]>;
+  setFilteredCoastalLocations: SetStateAction<LocationT[]>;
+  setFilteredSewageLocations: SetStateAction<[]>;
 };
 
 // TODO be moved to seperate folder as a component
@@ -70,13 +73,13 @@ const MapListener = ({
   }, [bounds]);
 
   useEffect(() => {
-    const recentFilteredCoastalLocations = coastalLocations?.filter(
-      (location) =>
+    const recentFilteredCoastalLocations: LocationT[] =
+      coastalLocations?.filter((location) =>
         map.getBounds().contains({
           lat: location.lat,
           lng: location.long,
         })
-    );
+      );
 
     setFilteredCoastalLocations(recentFilteredCoastalLocations);
   }, [bounds]);
@@ -128,7 +131,9 @@ const Map = () => {
   const ZOOM_LEVEL = 14;
   const mapRef = useRef();
 
-  const [filteredInlandLocations, setFilteredInlandLocations] = useState([]);
+  const [filteredInlandLocations, setFilteredInlandLocations] = useState<
+    LocationT[]
+  >([]);
   const [filteredCoastalLocations, setFilteredCoastalLocations] = useState([]);
   const [filteredSewageLocations, setFilteredSewageLocations] = useState([]);
 
@@ -166,37 +171,37 @@ const Map = () => {
   // }if (isPostcodeValid === false ){
   //   setMessage("Postcode can not be found, Please enter a valid Postocde")
   // }
-  const [err, setErr] = useState();
-  const[message, setMessage]= useState("");
-  const[isPostcodeValid, setIsPostcodeValid]=useState()
-  const[postcode,  setPostcodeList] = useState("")
+  const [err, setErr] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isPostcodeValid, setIsPostcodeValid] = useState(false);
+  const [postcode, setPostcodeList] = useState("");
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    checkValidPostocde (postcode).then((result)=>{
-      setIsPostcodeValid(result);
-      if(isPostcodeValid === false){
-        setMessage("Postcode can not be found, Please enter a valid Postocde")
+    console.log(postcode);
+    checkValidPostocde(postcode).then((result) => {
+      console.log(result);
+      if (!result) {
+        setErr(true);
+        setMessage("Postcode can not be found, Please enter a valid Postcode");
+        return;
       }
-    })
-    if (isPostcodeValid === true){
-  fetchPostCode(postcode).then((currentPostcode) => {
-      if (currentPostcode.loaded) {
-        mapRef.current.flyTo(
-          [currentPostcode.coordinates.lat, currentPostcode.coordinates.lng],
-          ZOOM_LEVEL,
-          { animate: true }
-        )
-      }
-      
-    })
-    }
+
+      fetchPostCode(postcode).then((currentPostcode) => {
+        if (currentPostcode.loaded) {
+          mapRef.current.flyTo(
+            [currentPostcode.coordinates.lat, currentPostcode.coordinates.lng],
+            ZOOM_LEVEL,
+            { animate: true }
+          );
+        }
+      });
+    });
+
+    setErr(false);
     setMessage("");
-      setPostcodeList("");
-  }
-  
-   
-    
+    setPostcodeList("");
+  };
 
   const handlePopUpClick = (id: any) => {
     navigate(`/location/${id}`);
@@ -321,14 +326,11 @@ const Map = () => {
           <button className="button" type="submit">
             submit!
           </button>
-          {err? <p>{err}</p> :null}
-          {!err ? <p>{message}</p> :null}
+          {err ? <p>{message}</p> : null}
         </form>
       </div>
     </>
   );
 };
 
-
 export default Map;
-

@@ -15,9 +15,13 @@ import Header from "./components/Header/Header";
 function App() {
   return (
     <section>
+
      
      <Header/>
      
+
+
+
       <Routes>
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Homepage />} />
@@ -26,7 +30,9 @@ function App() {
         <Route path="terms" element={<TsCs />} />
         <Route path="location/:id" element={<LocationDetails />} />
       </Routes>
+      
       <Footer/>
+
     </section>
   );
 }

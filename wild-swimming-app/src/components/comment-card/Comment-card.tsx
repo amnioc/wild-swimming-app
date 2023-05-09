@@ -24,10 +24,10 @@ const CommentCard: FC<commentProps> = ({
         alt={`avatar for ${username}`}
       />
       <section className={styles.commentDetails}>
-        {username}
         <span className={styles.dateVotes}>
           {created_at} . {votes} votes
         </span>
+        {username}
         <span className={styles.commentBody}>{body}</span>
       </section>
       <section className={styles.commentVotes}>
