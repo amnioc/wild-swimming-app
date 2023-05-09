@@ -12,8 +12,8 @@ const Homepage = () => {
   return (
     
     <section>
-      <Header/>
-    <Herosection/>
+      
+   
       
     
       <Map/>
