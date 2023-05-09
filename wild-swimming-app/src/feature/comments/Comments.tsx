@@ -3,7 +3,7 @@ import CommentCard from "../../components/comment-card/Comment-card";
 import styles from "./comments.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router";
-import { getCommentsByLocation } from "../../components/add-comment-form/utils/ comments-utils";
+import { getCommentsByLocation } from "./utils/comments-utils";
 
 const Comments = () => {
   const [locationComments, setLocationComments] = useState("");
