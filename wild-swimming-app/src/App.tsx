@@ -11,9 +11,7 @@ import Footer from "./feature/footer/Footer";
 function App() {
   return (
     <section>
-     
 
-     
       <Routes>
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Homepage />} />
@@ -22,7 +20,9 @@ function App() {
         <Route path="terms" element={<TsCs />} />
         <Route path="location/:id" element={<LocationDetails />} />
       </Routes>
+      
       <Footer/>
+
     </section>
   );
 }
