@@ -19,7 +19,7 @@ const Filter = () => {
   const waterCompanyValue = useRef<HTMLInputElement>(null);
   const locationValue = useRef<HTMLInputElement>(null);
 
-  const { sendRequest } = useBathingWaterRequest();
+  const { sendBathingWaterRequest } = useBathingWaterRequest();
 
   // this function should be moved to somewhere where
   // it can be use by the map to generate flags based on
@@ -52,12 +52,13 @@ const Filter = () => {
     };
 
     // TODO Hardcoded coords - string needs to change to template literal!
-    sendRequest(
-      "GET",
-      `https://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.long=-3.231360&max-samplingPoint.long=-1.926734&min-samplingPoint.lat=53.075973&max-samplingPoint.lat=53.664265`,
-      res
-    );
-  }, [sendRequest]);
+       sendBathingWaterRequest(
+        "GET",
+         `https://environment.data.gov.uk/doc/bathing-water.json?min-samplingPoint.long=-3.231360&max-samplingPoint.long=-1.926734&min-samplingPoint.lat=53.075973&max-samplingPoint.lat=53.664265`,
+        res
+     );
+    }, [sendBathingWaterRequest]);
+
 
   return (
     <section className={styles.Container}>

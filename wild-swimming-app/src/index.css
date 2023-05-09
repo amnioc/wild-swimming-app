@@ -1,5 +1,5 @@
 :root {
-  --primary-theme-colour: #9bc4cb;
+  --primary-theme-color: #9bc4cb;
   --secondary-theme-color: #dbefbc;
 
   --highlight-color: #e2fadb;
@@ -10,6 +10,9 @@
 
 * {
   margin: 0;
+
+  /* display: flex; */
+  place-items: center;
   padding: 0;
   box-sizing: border-box;
 }
@@ -24,6 +27,8 @@ html {
 }
 
 body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
   background-color: rgb(234, 234, 234);
   font-size: 1.6rem;
 }
