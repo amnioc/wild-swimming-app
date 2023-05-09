@@ -1,11 +1,17 @@
 import styles from "./footer.module.css";
 import { Link } from "react-router-dom";
+import Splash from "./Splash.png";
 const Footer = () => {
   return (
     <footer className={styles.container}>
       <div className={styles.innercontainer}>
         <div className={styles.logocontainer}>
-          <img src="" alt="Splash logo" width="50rem" />
+          <img
+            className={styles.logo}
+            src={Splash}
+            alt="Splash logo"
+            width="90rem"
+          />
           <p className={styles.slogan}>
             Splash places<br></br> to swim
           </p>
@@ -53,7 +59,10 @@ const Footer = () => {
             <br></br>
             Phone: 07123456789<br></br>
             E-Mail:{" "}
-            <a href="mailto:team2projectphase@gmail.com">
+            <a
+              className={styles.atag}
+              href="mailto:team2projectphase@gmail.com"
+            >
               team2projectphase@gmail.com
             </a>
           </p>

@@ -5,6 +5,7 @@ import { LocationDetailsT } from "../../types/types";
 
 import styles from "./location-details.module.css";
 import AddCommentForm from "../../components/add-comment-form/AddCommentForm";
+import { useAuth0 } from "@auth0/auth0-react";
 import Comments from "../../feature/comments/Comments";
 
 type LocationResponseT<T> = {
@@ -13,7 +14,8 @@ type LocationResponseT<T> = {
 
 const LocationDetails = () => {
   const [location, setLocation] = useState<LocationDetailsT>();
-
+const{user} = useAuth0()
+console.log(user)
   const { id } = useParams();
 
   const { sendLocationRequest, isLoading, isError, errorMsg } =
@@ -32,7 +34,9 @@ const LocationDetails = () => {
   }, [sendLocationRequest, id]);
 
   return (
+  
     <section className={styles.Location}>
+      
       {isError && <span>{errorMsg}</span>}
 
       {isLoading && <span>Loading...</span>}
