@@ -13,8 +13,7 @@ type LocationResponseT<T> = {
 
 const LocationDetails = () => {
   const [location, setLocation] = useState<LocationDetailsT>();
-const{user} = useAuth0()
-console.log(user)
+
   const { id } = useParams();
 
   const { sendLocationRequest, isLoading, isError, errorMsg } =
