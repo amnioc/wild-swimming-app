@@ -11,7 +11,7 @@ import homepage from "./Homepage.png";
 const Homepage = () => {
   return (
     <section>
-      <Header />
+     
      <Herosection />
       <Map/>
       <Footer />
