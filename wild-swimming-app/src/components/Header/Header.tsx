@@ -116,10 +116,9 @@ const Header = () => {
 
             <button type="submit">Search</button>
           </form>
-         
-          <LoginButton />
-          <LogoutButton />
-         
+
+          {!isAuthenticated && <LoginButton />}
+          {isAuthenticated && <LogoutButton />}
         </div>
       </div>
       {user !== undefined && isAuthenticated && (
