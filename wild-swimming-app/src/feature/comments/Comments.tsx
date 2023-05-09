@@ -22,20 +22,15 @@ const Comments = () => {
   }, [location_id]);
 
   if (isLoading) {
-    {
-      err ? <h4>{err}</h4> : null;
-    }
     return <h4 className={styles.loadingMessage}>Comments Loading...</h4>;
   }
   //map comments
-
   return (
     <section className={styles.commentsSection}>
-      {/* <New Comment Form> */}
       <ul className={styles.commentsList}>
         {locationComments.map((comment) => {
           return (
-            <section>
+            <section key={comment._id}>
               <CommentCard user={user} comment={comment} />
             </section>
           );
