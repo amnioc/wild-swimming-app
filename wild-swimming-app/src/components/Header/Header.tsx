@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../loginbutton/loginbutton";
 import LogoutButton from "../logoutbutton/logoutbutton";
 import logo from "./logo.png";
@@ -115,8 +115,10 @@ const Header = () => {
             <input type="text" placeholder="Search..." />
             <button type="submit">Search</button>
           </form>
+         
           <LoginButton />
           <LogoutButton />
+         
         </div>
       </div>
       {user !== undefined && isAuthenticated && (
