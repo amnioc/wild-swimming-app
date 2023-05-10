@@ -13,7 +13,6 @@ const AddCommentForm = ({ setLocationComments, locationComments }) => {
   const [submitting, setSubmitting] = useState(false);
   const [bodyMessage, setBodyMessage] = useState("");
   const [err, setErr] = useState("");
-
   const [message, setMessage] = useState("");
 
   const handleSubmit = (event: any) => {
@@ -22,8 +21,8 @@ const AddCommentForm = ({ setLocationComments, locationComments }) => {
       name: user?.name,
       body: bodyMessage,
       location_id: location_Id,
-      // avatar_url: user?.picture,
-      // user_id: user?.user_id,
+      avatar_url: user?.picture,
+      user_id: user?.sub,
     };
     setLocationComments((currentComments) => {
       return [inputComment, ...currentComments];

@@ -39,7 +39,12 @@ const Comments = () => {
           {locationComments.map((comment) => {
             return (
               <section key={comment._id}>
-                <CommentCard user={user} comment={comment} />
+                <CommentCard
+                  user={user}
+                  comment={comment}
+                  setLocationComments={setLocationComments}
+                  locationComments={locationComments}
+                />
               </section>
             );
           })}
