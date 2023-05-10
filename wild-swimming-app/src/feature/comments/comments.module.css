@@ -1,7 +1,9 @@
 .commentsSection {
+  width: 100%;
 }
 
 .commentsList {
+  width: 100%;
   display: grid;
   justify-items: stretch;
 }

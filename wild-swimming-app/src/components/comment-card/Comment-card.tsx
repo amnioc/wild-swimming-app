@@ -51,7 +51,11 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
       </section>
       <section className={styles.commentVotes}>
         Like this comment?{" "}
-        <button aria-label="like comment" onClick={handleVoteClick}>
+        <button
+          aria-label="like comment"
+          className={styles.likeButton}
+          onClick={handleVoteClick}
+        >
           {" "}
           👍
         </button>
