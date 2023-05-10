@@ -1,0 +1,33 @@
+.commentsform {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
+
+.welcomeMessage {
+}
+
+.loginReminder {
+  justify-self: stretch;
+  margin-right: 10px;
+}
+
+.loginButton {
+  height: 20px;
+  padding-bottom: 5px;
+  display: flex;
+}
+
+.commentForm {
+  grid-column: 2/5;
+}
+
+.commentBox {
+  justify-self: start;
+  display: inline-block;
+}
+
+.commentButton {
+  color: var(--mid);
+}
