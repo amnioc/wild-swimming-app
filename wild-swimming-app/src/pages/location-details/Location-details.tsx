@@ -123,7 +123,7 @@ console.log(user)
       )}
 
       {/*TODO add a comments feature, which holds the comment cards*/}
-      <AddCommentForm />
+     
       <Comments />
     </section>
   );

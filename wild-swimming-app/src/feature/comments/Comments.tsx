@@ -4,6 +4,7 @@ import styles from "./comments.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router";
 import { getCommentsByLocation } from "./utils/comments-utils";
+import AddCommentForm from "../../components/add-comment-form/AddCommentForm";
 
 const Comments = () => {
   const [locationComments, setLocationComments] = useState("");
@@ -26,6 +27,11 @@ const Comments = () => {
   }
   //map comments
   return (
+   <div>git 
+    <section className={styles.commentForm}>
+      
+    <AddCommentForm  setLocationComments={setLocationComments} locationComments={locationComments}/>
+    </section>
     <section className={styles.commentsSection}>
       <ul className={styles.commentsList}>
         {locationComments.map((comment) => {
@@ -37,6 +43,7 @@ const Comments = () => {
         })}
       </ul>
     </section>
+    </div>
   );
 };
 
