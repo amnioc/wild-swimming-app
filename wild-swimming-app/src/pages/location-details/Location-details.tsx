@@ -80,7 +80,7 @@ const{user} = useAuth0()
 
   return (
 
-    <>
+    
    
       <section className={styles.Location}>
         {isError && <span>{errorMsg}</span>}
