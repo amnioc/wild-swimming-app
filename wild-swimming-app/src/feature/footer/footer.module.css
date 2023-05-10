@@ -1,36 +1,37 @@
 .container {
   height: 100%;
-  background-color: #333333;
+  background-color: var(--dark);
   padding-bottom: 4rem;
 }
 
 .innercontainer {
-  /* display: flex;
-  flex-direction: row; */
-  margin-left: 2rem;
+  /* margin-left: 2rem;
   margin-right: 2rem;
   margin-left: 4rem;
   margin-right: 4rem;
   padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-bottom: 4rem; */
+
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
 }
-.logocontainer {
-  padding-bottom: 1rem;
-  padding-top: 5rem;
-}
-.logo {
-  border-radius: 30px;
-}
+
 .slogan {
   margin-top: 1rem;
-  color: #ffffff;
+  color: var(--highlight);
 }
 
 .linkheading {
   margin-top: 1rem;
   font-size: 2rem;
   line-height: 1.75rem;
-  color: #ffffff;
+  color: var(--highlight);
   /* padding-left: 10px; */
 }
 
@@ -41,47 +42,60 @@
   padding-bottom: 4rem;
   /* margin-top: 0.5rem; */
   /* max-width: 50px; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .linkitem {
   font-weight: 400;
   font-size: 1.5rem;
   line-height: 1.5rem;
-  color: white;
+  color: var(--highlight);
   border-color: transparent;
   border-bottom-width: 4px;
 }
 
 .linkitem:hover {
-  border-color: #3b4531 color white;
+  border-color: #3b4531 color var(--highlight);
 }
+
 .linkitemli {
   margin: 0;
   margin-right: 10px;
 }
+
 .contactcontainer {
   margin-top: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .contactheading {
   font-size: 2rem;
   line-height: 1.75rem;
-  color: white;
+  color: var(--highlight);
 }
 
 .contactaddress {
   margin-top: 0.5rem;
-  color: white;
+  color: var(--highlight);
 }
+
 .atag:link,
 .atag:visited,
 .atag:hover,
 .atag:active {
   text-decoration: none;
-  color: #ffffff;
+  color: var(--highlight);
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
+/* Large devices (laptops/desktops, 992px and up)
 @media only screen and (min-width: 992px) {
   .innercontainer {
     display: flex;
@@ -100,6 +114,6 @@
     align-items: start;
     padding-bottom: 2rem;
     /* margin-top: 0.5rem; */
-    /* max-width: 50px; */
-  }
-}
+/* max-width: 50px; */
+/* }
+}  */
