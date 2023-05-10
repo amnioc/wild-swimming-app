@@ -12,12 +12,14 @@ const Homepage = () => {
   return (
     
     <section>
+
       
    <Herosection />
       
     
       <Map/>
      
+
     </section>
   );
 };
