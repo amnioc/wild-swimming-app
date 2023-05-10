@@ -1,7 +1,7 @@
 .commentsSection {
-  display: flex;
 }
 
 .commentsList {
-  display: flex;
+  display: grid;
+  justify-items: stretch;
 }

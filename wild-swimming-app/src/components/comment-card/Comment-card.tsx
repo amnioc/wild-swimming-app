@@ -39,20 +39,18 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
     <article className={styles.comment}>
       <img
         className={styles.avatar}
-        src={
-          "https://images.unsplash.com/photo-1682685797741-f0213d24418c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-        }
+        src={comment.avatar_url}
         alt={`avatar for ${comment.name}`}
       />
       <section className={styles.commentDetails}>
         <span className={styles.dateVotes}>
           {comment.created_at} . {comment.votes} votes
         </span>
-        {comment.name}
+        <span className={styles.userSays}>{comment.name} says:</span>
         <span className={styles.commentBody}>{comment.body}</span>
       </section>
       <section className={styles.commentVotes}>
-        Agree?{" "}
+        Like this comment?{" "}
         <button aria-label="like comment" onClick={handleVoteClick}>
           {" "}
           👍
