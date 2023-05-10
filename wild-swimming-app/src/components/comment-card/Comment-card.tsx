@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import styles from "./comment-card.module.css";
 import { patchCommentVotes } from "../../feature/comments/utils/comments-utils";
+import DeleteButton from "../button/Button";
 
 interface commentProps {
   avatar: string;
@@ -11,7 +12,6 @@ interface commentProps {
 }
 
 const CommentCard: FC<commentProps> = ({ comment, user }) => {
-  const [commentVotes, setCommentVotes] = useState(`${comment.votes}`);
   const [addedVotes, setAddedVotes] = useState(0);
   const commentDate = new Date(comment.created_at).toString().split("G")[0];
   const [err, setErr] = useState(null);
@@ -41,6 +41,7 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
         </span>
         <span className={styles.userSays}>{comment.name} says:</span>
         <span className={styles.commentBody}>{comment.body}</span>
+        {/* {comment.user_id === user.user_id ? <DeleteButton /> : null} */}
       </section>
       <section className={styles.commentVotes}>
         Like this comment?{" "}

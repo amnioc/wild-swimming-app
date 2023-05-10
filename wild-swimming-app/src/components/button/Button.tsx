@@ -1,5 +1,5 @@
-const Button = () => {
-  return <button></button>;
+const DeleteButton = () => {
+  return <button onClick={}>Delete Comment</button>;
 };
 
-export default Button;
+export default DeleteButton;
