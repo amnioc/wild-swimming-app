@@ -1,0 +1,45 @@
+.herosectioncontainer {
+  position: relative;
+}
+
+.heroimage {
+  height: 60rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: url("./Homepage.png");
+}
+.herotextsection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+}
+.h1 {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 1rem 2rem;
+
+  color: #000000;
+  background-color: #2aa7ac;
+}
+
+.searchbutton {
+  display: inline-block;
+  color: #2aa7ac;
+  background-color: #000000;
+  margin-top: 5rem;
+  padding: 1rem 2rem;
+  border: 2px solid skyblue;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+}
+.searchbutton:hover {
+  background-color: #30952e;
+  color: #0f0f0f;
+}

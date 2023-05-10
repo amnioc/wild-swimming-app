@@ -1,0 +1,105 @@
+.container {
+  height: 100%;
+  background-color: #333333;
+  padding-bottom: 4rem;
+}
+
+.innercontainer {
+  /* display: flex;
+  flex-direction: row; */
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.logocontainer {
+  padding-bottom: 1rem;
+  padding-top: 5rem;
+}
+.logo {
+  border-radius: 30px;
+}
+.slogan {
+  margin-top: 1rem;
+  color: #ffffff;
+}
+
+.linkheading {
+  margin-top: 1rem;
+  font-size: 2rem;
+  line-height: 1.75rem;
+  color: #ffffff;
+  /* padding-left: 10px; */
+}
+
+.linkcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-bottom: 4rem;
+  /* margin-top: 0.5rem; */
+  /* max-width: 50px; */
+}
+
+.linkitem {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  color: white;
+  border-color: transparent;
+  border-bottom-width: 4px;
+}
+
+.linkitem:hover {
+  border-color: #3b4531 color white;
+}
+.linkitemli {
+  margin: 0;
+  margin-right: 10px;
+}
+.contactcontainer {
+  margin-top: 1rem;
+}
+
+.contactheading {
+  font-size: 2rem;
+  line-height: 1.75rem;
+  color: white;
+}
+
+.contactaddress {
+  margin-top: 0.5rem;
+  color: white;
+}
+.atag:link,
+.atag:visited,
+.atag:hover,
+.atag:active {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .innercontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .linkcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-bottom: 2rem;
+    /* margin-top: 0.5rem; */
+    /* max-width: 50px; */
+  }
+}

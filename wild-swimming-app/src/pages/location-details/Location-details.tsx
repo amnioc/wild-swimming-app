@@ -4,9 +4,15 @@ import useBathingWaterRequest from "../../hooks/useBathingWaterRequest";
 import { LocationDetailsT } from "../../types/types";
 
 import styles from "./location-details.module.css";
+
 import SiteMap from "../../feature/map/SiteMap";
 import Header from "../../components/Header/Header";
 import axios from "axios";
+
+import AddCommentForm from "../../components/add-comment-form/AddCommentForm";
+import { useAuth0 } from "@auth0/auth0-react";
+import Comments from "../../feature/comments/Comments";
+
 
 type LocationResponseT<T> = {
   location: Array<T>;
@@ -19,9 +25,15 @@ type InlandLocationT = {
 };
 
 const LocationDetails = () => {
+
   const [location, setLocation] = useState<
     LocationDetailsT | InlandLocationT
   >();
+
+
+ 
+const{user} = useAuth0()
+
 
   const { id } = useParams();
 
@@ -67,6 +79,7 @@ const LocationDetails = () => {
   }, [sendLocationRequest, id]);
 
   return (
+
     <>
       <Header />
       <section className={styles.Location}>
