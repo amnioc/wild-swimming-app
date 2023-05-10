@@ -1,10 +1,10 @@
 import axios from "axios";
 const swimmingApi = axios.create({
-  baseURL: "",
+  baseURL: `https://splash-wild-swimming-be.onrender.com/api`,
 });
-export const postComments = (location_Id, inputComment) => {
+export const postComments = ( inputComment) => {
   return swimmingApi
-    .post(`/${location_Id}/comments`, inputComment)
+    .post(`/comments`, inputComment)
     .then((response) => {
       return response.data.comments;
     });

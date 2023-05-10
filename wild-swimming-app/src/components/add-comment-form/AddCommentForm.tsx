@@ -1,39 +1,45 @@
 import { postComments } from "./utils/ comments-utils";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../loginbutton/loginbutton";
+
+const AddCommentForm = ({ setLocationComments, locationComments }) => {
 
 
-const AddCommentForm = () => {
-  const { user, isAuthenticated} = useAuth0();
-
-
+  const { user } = useAuth0();
   const params = useParams();
   const location_Id =params.id;
-const[userName, setUserName]= useState('water_baby')
+ 
+
 const[submitting, setSubmitting]= useState(false);
 const[bodyMessage, setBodyMessage]= useState("")
 const [err, setErr] = useState("");
-const[commentsList, setCommentsList]= useState("");
+
 const[message, setMessage]= useState("");
-console.log(user);
+
+
 
 const handleSubmit = (event:any)=>{
   event.preventDefault();
     const inputComment ={
-     name:userName,
+     name:user?.name,
      body:bodyMessage,
+     location_id:location_Id,
+     
     };
-setCommentsList((currentComments)=>{
+   console.log(inputComment)
+setLocationComments((currentComments)=>{
   return ([inputComment, ...currentComments])})
                     setMessage("We have loaded your comment");
                      setErr("")
                      setSubmitting(true);
-                     postComments(location_Id, inputComment).catch((err) => {
+                     postComments(inputComment).catch((err) => {
                       if(body === ""){
                       setMessage("Please enter a comment")}
                       else{
-                          setCommentsList((currentComments) => {
+                          setLocationComments((currentComments) => {
                         return  [...currentComments]}).then((copyArray)=>{
                         copyArray.shift();
                         })
@@ -43,11 +49,28 @@ setCommentsList((currentComments)=>{
                             })
                             setBodyMessage("")
                             setSubmitting(false);
+                           setMessage("")
                               };
   return (
   <div className="commentsform">
+    
+    {user !== undefined && (
+        <div>
+          <p>Have you swam here, {user.name}? We'd love to hear about it...</p>
+          
+        </div>
+      )}
+       {user === undefined && (
+        <div>
+         <p> <LoginButton />
+              to leave a comment</p>
+          
+        </div>
+      )}
+      
   <form  onSubmit={handleSubmit}>
-    <h3> Post a New Comment</h3>
+    
+
     <textarea className="grid_item1"
               value={bodyMessage}
               required
@@ -58,6 +81,8 @@ setCommentsList((currentComments)=>{
             + Comment!
         </button>
   </form>
+  {err ? <p>{err}</p> :null}
+        {!err ? <p>{message}</p> :null}
   </div>
   )
 };
