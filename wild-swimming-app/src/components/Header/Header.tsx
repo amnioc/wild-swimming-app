@@ -10,7 +10,6 @@ const Header = () => {
   const { user, isAuthenticated } = useAuth0();
   const [isHamOpen, setIsHamOpen] = useState(false);
 
-
   // if (isLoading) {
   //   return <div>Loading ...</div>;
   // }
@@ -130,6 +129,7 @@ const Header = () => {
       )}
     </div>
   );
+  console.log(user);
 };
 
 export default Header;

@@ -1,0 +1,9 @@
+.title {
+  font-size: 1.5rem;
+  /* make it bold */
+  font-weight: bold;
+}
+
+.bold{
+  font-weight: bold;
+}
