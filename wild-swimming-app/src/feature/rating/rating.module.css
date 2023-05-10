@@ -1,0 +1,15 @@
+.rating_list .droplet {
+  height: 2.6rem;
+  width: 2.6rem;
+}
+
+.rating_list .droplet:hover,
+.rating_list .droplet:hover ~ .droplet {
+  transform: scale(110%);
+  color: var(--mid);
+}
+
+.rating-list {
+  display: inline-block;
+  list-style: none;
+}

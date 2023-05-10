@@ -1,22 +1,43 @@
 .herosectioncontainer {
   position: relative;
+
+  height: 100vh;
+
+  margin-top: -14rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .heroimage {
-  height: 50rem;
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-image: url("./Homepage.png");
+
+  z-index: -10;
 }
+
 .herotextsection {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 60%;
+
+  font-size: 1.2rem;
+
+  border: var(--border);
 }
+
 .h1 {
   display: inline-block;
   font-size: 3rem;
@@ -24,8 +45,8 @@
   line-height: 1.5;
   padding: 1rem 2rem;
 
-  color: #000000;
-  background-color: #2aa7ac;
+  color: var(--dark);
+  background-color: var(--mid);
 }
 
 .searchbutton {
@@ -42,12 +63,4 @@
 .searchbutton:hover {
   background-color: #30952e;
   color: #0f0f0f;
-}
-
-.intro{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: larger;
-  font-weight: 300;
-  align-content: center;
-  line-height:normal;
 }
