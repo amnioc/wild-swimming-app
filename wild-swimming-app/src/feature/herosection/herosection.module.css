@@ -3,7 +3,7 @@
 }
 
 .heroimage {
-  height: 60rem;
+  height: 50rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -42,4 +42,12 @@
 .searchbutton:hover {
   background-color: #30952e;
   color: #0f0f0f;
+}
+
+.intro{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: larger;
+  font-weight: 300;
+  align-content: center;
+  line-height:normal;
 }

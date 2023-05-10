@@ -221,9 +221,39 @@ const Map = () => {
 
   return (
     <>
-      <h1> Map goes here</h1>
+     
 
       <div>
+      <section>
+    <h4>How to use the swimming map </h4>
+    </section>
+    <section>
+      <h6>Key:  
+<p>Storm Overflow Data</p>
+<p> Bathing Water Locations</p>
+      </h6>
+   
+  </section>
+      <form onSubmit={handleSubmit}>
+          <label>
+            <p>Search by postcode</p>
+            <input
+              type="text"
+              required
+              value={postcode}
+              onChange={(event) => setPostcodeList(event.target.value)}
+            />
+          </label>
+
+          <br></br>
+          <button className="button" type="submit">
+            submit!
+          </button>
+
+          {err ? <p>{message}</p> : null}
+
+        </form>
+        <button onClick={showMyLocation}>Find my Location</button>
         <MapContainer
           center={center}
           zoom={ZOOM_LEVEL}
@@ -326,30 +356,13 @@ const Map = () => {
           ></Marker>
         </MapContainer>
         <div>
-          <button onClick={showMyLocation}>Locate Me</button>
+       
+         
         </div>
       </div>
 
       <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <p>Search by postcode</p>
-            <input
-              type="text"
-              required
-              value={postcode}
-              onChange={(event) => setPostcodeList(event.target.value)}
-            />
-          </label>
-
-          <br></br>
-          <button className="button" type="submit">
-            submit!
-          </button>
-
-          {err ? <p>{message}</p> : null}
-
-        </form>
+     
       </div>
     </>
   );
