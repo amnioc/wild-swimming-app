@@ -5,7 +5,7 @@ import RootLayout from "./components/RootLayout/RootLayout";
 import Homepage from "./pages/home/Homepage";
 import LocationDetails from "./pages/location-details/Location-details";
 import TsCs from "./pages/ts-cs/Ts-cs";
-
+import About from "./pages/about/About";
 import Footer from "./feature/footer/Footer";
 import Header from "./components/Header/Header";
 
@@ -19,6 +19,7 @@ function App() {
           <Route index element={<Homepage />} />
 
           <Route path="terms" element={<TsCs />} />
+          <Route path="about" element={<About />} />
           <Route path="location/:id" element={<LocationDetails />} />
         </Route>
       </Routes>
