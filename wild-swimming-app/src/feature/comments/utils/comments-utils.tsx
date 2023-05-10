@@ -21,7 +21,7 @@ export const patchCommentVotes = (comment_id) => {
       }
     )
     .then((response) => {
-      return response.data.review.votes;
+      return response.data.comment.votes;
     });
 };
 
