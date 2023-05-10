@@ -21,6 +21,8 @@
 
 .commentForm {
   grid-column: 2/5;
+  display: flex;
+  align-items: stretch;
 }
 
 .commentBox {
@@ -30,4 +32,5 @@
 
 .commentButton {
   color: var(--mid);
+  display: inline-block;
 }
