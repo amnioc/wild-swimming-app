@@ -80,8 +80,8 @@ const{user} = useAuth0()
 
   return (
 
-    <>
-      <Header />
+    
+   
       <section className={styles.Location}>
         {isError && <span>{errorMsg}</span>}
 
@@ -176,10 +176,11 @@ const{user} = useAuth0()
         )}
 
         {location && <SiteMap location={location} />}
+        <Comments/>
 
         {/*TODO add a comments feature, which holds the comment cards*/}
       </section>
-    </>
+ 
   );
 };
 
