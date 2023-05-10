@@ -11,28 +11,21 @@ interface commentProps {
 }
 
 const CommentCard: FC<commentProps> = ({ comment, user }) => {
-  const [thisComment, setThisComment] = useState(comment);
   const [commentVotes, setCommentVotes] = useState(`${comment.votes}`);
+  const [addedVotes, setAddedVotes] = useState(0);
   const commentDate = new Date(comment.created_at).toString().split("G")[0];
   const [err, setErr] = useState(null);
 
   const handleVoteClick = (event) => {
-    setThisComment((comment) => {
-      setErr(null);
-      event.currentTarget.disabled = true;
-      return { ...comment, votes: comment.votes + 1 };
-    });
+    setAddedVotes(1);
+    setErr(null);
+    event.currentTarget.disabled = true;
 
-    patchCommentVotes(comment._id)
-      .then((votes) => {
-        setCommentVotes(votes);
-      })
-      .catch((err) => {
-        setErr("Oops! Something went wrong, please try again later.");
-        setThisComment((comment) => {
-          return { ...comment, votes: comment.votes - 1 };
-        });
-      });
+    patchCommentVotes(comment._id).catch((err) => {
+      console.log(err);
+      setErr("Oops! Something went wrong, please try again later.");
+      setAddedVotes(0);
+    });
   };
 
   return (
@@ -44,7 +37,7 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
       />
       <section className={styles.commentDetails}>
         <span className={styles.dateVotes}>
-          {commentDate} . {comment.votes} votes
+          {commentDate} . {comment.votes + addedVotes} votes
         </span>
         <span className={styles.userSays}>{comment.name} says:</span>
         <span className={styles.commentBody}>{comment.body}</span>
@@ -59,6 +52,7 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
           {" "}
           👍
         </button>
+        {err ? <p>{err}</p> : null}
       </section>
     </article>
   );
