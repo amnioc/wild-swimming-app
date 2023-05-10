@@ -13,7 +13,7 @@ interface commentProps {
 const CommentCard: FC<commentProps> = ({ comment, user }) => {
   const [thisComment, setThisComment] = useState(comment);
   const [commentVotes, setCommentVotes] = useState(`${comment.votes}`);
-
+  const commentDate = new Date(comment.created_at).toString().split("G")[0];
   const [err, setErr] = useState(null);
 
   const handleVoteClick = (event) => {
@@ -39,21 +39,23 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
     <article className={styles.comment}>
       <img
         className={styles.avatar}
-        src={
-          "https://images.unsplash.com/photo-1682685797741-f0213d24418c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-        }
+        src={comment.avatar_url}
         alt={`avatar for ${comment.name}`}
       />
       <section className={styles.commentDetails}>
         <span className={styles.dateVotes}>
-          {comment.created_at} . {comment.votes} votes
+          {commentDate} . {comment.votes} votes
         </span>
-        {comment.name}
+        <span className={styles.userSays}>{comment.name} says:</span>
         <span className={styles.commentBody}>{comment.body}</span>
       </section>
       <section className={styles.commentVotes}>
-        Agree?{" "}
-        <button aria-label="like comment" onClick={handleVoteClick}>
+        Like this comment?{" "}
+        <button
+          aria-label="like comment"
+          className={styles.likeButton}
+          onClick={handleVoteClick}
+        >
           {" "}
           👍
         </button>

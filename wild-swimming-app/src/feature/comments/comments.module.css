@@ -1,7 +1,12 @@
 .commentsSection {
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .commentsList {
-  display: flex;
+  width: 100%;
+  display: grid;
+  justify-items: stretch;
 }
