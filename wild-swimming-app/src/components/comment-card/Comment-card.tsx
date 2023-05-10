@@ -13,7 +13,7 @@ interface commentProps {
 const CommentCard: FC<commentProps> = ({ comment, user }) => {
   const [thisComment, setThisComment] = useState(comment);
   const [commentVotes, setCommentVotes] = useState(`${comment.votes}`);
-
+  const commentDate = new Date(comment.created_at).toString().split("G")[0];
   const [err, setErr] = useState(null);
 
   const handleVoteClick = (event) => {
@@ -44,7 +44,7 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
       />
       <section className={styles.commentDetails}>
         <span className={styles.dateVotes}>
-          {comment.created_at} . {comment.votes} votes
+          {commentDate} . {comment.votes} votes
         </span>
         <span className={styles.userSays}>{comment.name} says:</span>
         <span className={styles.commentBody}>{comment.body}</span>
