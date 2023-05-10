@@ -180,7 +180,7 @@ const{user} = useAuth0()
 
         {/*TODO add a comments feature, which holds the comment cards*/}
       </section>
-    </>
+ 
   );
 };
 
