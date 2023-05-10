@@ -5,10 +5,12 @@ const About = () => {
     <div>
       <section>
         <h1>Welcome to Splash!</h1>
-       <p>
+       <section>
          At Splash, our mission is to provide you with accurate and up-to-date
         information about the finest bathing water spots in England.
-        <p> We are a team of passionate individuals who have joined forces to develop a
+        </section>
+        <br/>
+        <section> We are a team of passionate individuals who have joined forces to develop a
         reliable platform for water enthusiasts like you. Our team comprises
         five members who share a common love for the great outdoors and a
         profound admiration for England's natural beauty. With diverse
@@ -19,16 +21,16 @@ const About = () => {
         organizations, and local authorities to provide you with comprehensive
         information on water quality, amenities, accessibility, and any
         potential hazards associated with each bathing spot.
-        </p>
-        <p>
+        </section>
+        <section>
          Our commitment to
         accuracy and reliability means you can make informed choices when
         planning your beach visits. We firmly believe that access to clean and
         safe bathing waters is vital for everyone to enjoy nature responsibly.
         By offering detailed information and recommendations, we aim to empower
         individuals and families to have memorable and worry-free experiences.
-        </p>
-        <p>
+        </section>
+        <section>
         As a team, we are committed to upholding the highest standards of
         accuracy and reliability in our data. We regularly update our database
         to reflect any changes in water quality assessments, beach facilities,
@@ -37,26 +39,27 @@ const About = () => {
         growing community of water enthusiasts. Share your experiences, discover
         hidden gems, and contribute to our mission of promoting sustainable
         enjoyment of England's bathing waters.
-        </p>
-        <p>
+        </section>
+        <section>
          Your involvement can help us
         create a vibrant and engaged community that appreciates and protects
         these precious natural resources. If you have any questions, feedback,
         or suggestions, please do not hesitate to reach out to us. We value your
         input and are always striving to improve our platform to better serve
         your needs.
-        </p>
-        <p>
+        </section>
+        <br/>
+        <section>
          Visit our Contact Us page for more information on how to get
         in touch.
-        </p>
-        <p>
+        </section>
+        <br/>
+        <section>
          Thank you for visiting Splash! We hope you find our website
         informative and helpful in discovering the best bathing waters in
         England.
-        </p>
-        </p>
-      </section>
+        </section>
+        </section>
     </div>
   );
 };
