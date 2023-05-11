@@ -92,10 +92,10 @@ const MapListener = ({
   useEffect(() => {
     map.setView(
       {
-        lat: 51.5095146286,
-        lng: -0.1244828354,
+        lat: 53.483959,
+        lng: -2.244644,
       },
-      14
+      11
     );
   }, []);
 
@@ -363,6 +363,7 @@ const Map = () => {
       </section>
 
       <div></div>
+
     </>
   );
 };
