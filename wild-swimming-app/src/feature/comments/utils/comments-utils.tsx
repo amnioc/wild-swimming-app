@@ -26,5 +26,14 @@ export const patchCommentVotes = (comment_id) => {
 };
 
 //delete comment if comment written by user
+export const deleteCommentByID = (comment_id) => {
+  return axios
+    .delete(
+      `https://splash-wild-swimming-be.onrender.com/api/comments/${comment_id}`
+    )
+    .then((response) => {
+      return response.data.comment;
+    });
+};
 
 // const testLocation = ukd5400-40750

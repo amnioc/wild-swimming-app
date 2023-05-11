@@ -1,0 +1,8 @@
+.deleteCommentButton {
+  grid-column: 1/2;
+  font-size: 1rem;
+  margin-top: 5px;
+  justify-self: stretch;
+  color: var(--emphasis);
+  text-emphasis-color: var(--dark);
+}

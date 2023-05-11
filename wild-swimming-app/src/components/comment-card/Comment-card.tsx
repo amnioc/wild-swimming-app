@@ -1,20 +1,29 @@
 import { FC, useState } from "react";
 import styles from "./comment-card.module.css";
 import { patchCommentVotes } from "../../feature/comments/utils/comments-utils";
-import DeleteButton from "../button/Button";
+import DeleteButton from "../button/Delete-Button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface commentProps {
-  avatar: string;
+  avatar_url: string;
   name: string;
   created_at: string;
   body: string;
   votes: number;
+  locationComments: object[];
+  setLocationComments: any;
 }
 
-const CommentCard: FC<commentProps> = ({ comment, user }) => {
+const CommentCard: FC<commentProps> = ({
+  comment,
+  setLocationComments,
+  locationComments,
+}) => {
   const [addedVotes, setAddedVotes] = useState(0);
   const commentDate = new Date(comment.created_at).toString().split("G")[0];
   const [err, setErr] = useState(null);
+  const [authorSignedIn, setauthorSignedIn] = useState(false);
+  const { user } = useAuth0();
 
   const handleVoteClick = (event) => {
     setAddedVotes(1);
@@ -29,7 +38,7 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
   };
 
   return (
-    <article className={styles.comment}>
+    <article className={styles.comment} key={comment._id}>
       <img
         className={styles.avatar}
         src={comment.avatar_url}
@@ -41,7 +50,13 @@ const CommentCard: FC<commentProps> = ({ comment, user }) => {
         </span>
         <span className={styles.userSays}>{comment.name} says:</span>
         <span className={styles.commentBody}>{comment.body}</span>
-        {/* {comment.user_id === user.user_id ? <DeleteButton /> : null} */}
+        {comment.user_id === "unknown" ? (
+          <DeleteButton
+            comment={comment}
+            setLocationComments={setLocationComments}
+            locationComments={locationComments}
+          />
+        ) : null}
       </section>
       <section className={styles.commentVotes}>
         Like this comment?{" "}
