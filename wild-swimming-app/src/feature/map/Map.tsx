@@ -155,8 +155,6 @@ const Map = () => {
     }
   };
 
-  //Postcode
-
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
   const [isPostcodeValid, setIsPostcodeValid] = useState(false);
@@ -198,132 +196,174 @@ const Map = () => {
 
   return (
     <>
-      <div>
-        <div className="locateButton">
-          <button onClick={showMyLocation}>Locate Me</button>
-        </div>
-      </div>
+      <section className={styles.container}>
+        <h4>How to use the swimming map</h4>
 
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <p>Search by postcode</p>
-            <input
-              type="text"
-              required
-              value={postcode}
-              onChange={(event) => setPostcodeList(event.target.value)}
+        <details>
+          <summary>What is a storm overflow?</summary>
+          <p>
+            Storm overflows are release valves used when sewage systems become
+            at risk of being overwhelmed—for example, in periods of high
+            rainfall. They release water and sewage into rivers and the sea to
+            prevent damage to the sewage system that could cause flooding of
+            properties and streets.
+          </p>
+        </details>
+
+        <div className={styles.key}>
+          <h6 className={styles.key_title}>Key: </h6>
+          <div className={styles.key_divs}>
+            <img
+              src="https://img.icons8.com/?size=512&id=3790&format=png"
+              alt="map icon"
+              className={styles.key_icons}
             />
-          </label>
+            <p>You Are Here</p>
+          </div>
+          <div className={styles.key_divs}>
+            <img
+              src="https://img.icons8.com/?size=512&id=86830&format=png"
+              alt="map icon"
+              className={styles.key_icons}
+            />
+            <p>Storm Overflow Data</p>
+          </div>
+          <div className={styles.key_divs}>
+            <img
+              src="https://img.icons8.com/?size=512&id=3781&format=png"
+              alt="map icon"
+              className={styles.key_icons}
+            />
+            <p> Bathing Water Locations</p>
+          </div>
+        </div>
+        <form onSubmit={handleSubmit} className={styles.postcode_form}>
+          <label htmlFor="postcode">Search by postcode</label>
 
-          <br></br>
-          <button className="button" type="submit">
-            submit!
+          <input
+            name="postcode"
+            type="text"
+            required
+            value={postcode}
+            onChange={(event) => setPostcodeList(event.target.value)}
+            className={styles.postcode_search}
+          />
+
+          <button className={styles.postcode_button} type="submit">
+            Search
           </button>
 
           {err ? <p>{message}</p> : null}
         </form>
-      </div>
+        <button onClick={showMyLocation} className={styles.findme_button}>
+          Find my Location
+        </button>
+        <MapContainer
+          center={center}
+          zoom={ZOOM_LEVEL}
+          scrollWheelZoom={false}
+          ref={mapRef}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
+          />
 
-      <MapContainer
-        center={center}
-        zoom={ZOOM_LEVEL}
-        scrollWheelZoom={false}
-        ref={mapRef}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-          url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
-        />
-
-        <MapListener
-          setFilteredInlandLocations={setFilteredInlandLocations}
-          setFilteredCoastalLocations={setFilteredCoastalLocations}
-          setFilteredSewageLocations={setFilteredSewageLocations}
-        />
-        <LayersControl postion="topright">
-          <LayersControl.Overlay checked name="Storm Overflow 2022">
-            <MarkerClusterGroup disableClusteringAtZoom={14}>
-              {filteredSewageLocations.map((marker: any) => (
-                <Marker
-                  key={marker.properties.OBJECTID}
-                  position={[
-                    marker.geometry.coordinates[1],
-                    marker.geometry.coordinates[0],
-                  ]}
-                  icon={markerIcon}
-                >
-                  <Popup>
-                    <span>
-                      Water Company: {marker.properties.waterCompanyName}
-                    </span>
-                    <span>
-                      Storm Overflow Duration:{" "}
-                      {marker.properties.totalDurationAllSpillsHrs} hours
-                    </span>
-                  </Popup>
-                </Marker>
-              ))}
-            </MarkerClusterGroup>
-          </LayersControl.Overlay>
-
-          <LayersControl.Overlay checked name="Bathing Water Sites">
-            <LayerGroup>
-              {filteredCoastalLocations?.map((marker: any) => (
-                <Marker
-                  key={marker.id}
-                  position={[marker.lat, marker.long]}
-                  icon={bathingIcon}
-                >
-                  <Popup>
-                    <span>
-                      <span onClick={() => handlePopUpClick(marker.id)}>
-                        {marker.location}
+          <MapListener
+            setFilteredInlandLocations={setFilteredInlandLocations}
+            setFilteredCoastalLocations={setFilteredCoastalLocations}
+            setFilteredSewageLocations={setFilteredSewageLocations}
+          />
+          <LayersControl postion="topright">
+            <LayersControl.Overlay checked name="Storm Overflow 2022">
+              <MarkerClusterGroup disableClusteringAtZoom={14}>
+                {filteredSewageLocations.map((marker: any) => (
+                  <Marker
+                    key={marker.properties.OBJECTID}
+                    position={[
+                      marker.geometry.coordinates[1],
+                      marker.geometry.coordinates[0],
+                    ]}
+                    icon={markerIcon}
+                  >
+                    <Popup>
+                      <span>
+                        Water Company: {marker.properties.waterCompanyName}
                       </span>
-                    </span>
-
-                    <span>Description: {marker.locationDescription}</span>
-                  </Popup>
-                </Marker>
-              ))}
-
-              {filteredInlandLocations?.map((marker: any) => (
-                <Marker
-                  key={marker.properties.objectid}
-                  position={[
-                    marker.geometry.coordinates[1],
-                    marker.geometry.coordinates[0],
-                  ]}
-                  icon={bathingIcon}
-                >
-                  <Popup>
-                    <span>
-                      {" "}
-                      <span
-                        onClick={() =>
-                          handlePopUpClick(marker.properties.objectid)
-                        }
-                      >
-                        {marker.properties.site_name}
+                      <span>
+                        Storm Overflow Duration:{" "}
+                        {marker.properties.totalDurationAllSpillsHrs} hours
                       </span>
-                    </span>
+                    </Popup>
+                  </Marker>
+                ))}
+              </MarkerClusterGroup>
+            </LayersControl.Overlay>
 
-                    <span>Info: {marker.properties.description}</span>
-                  </Popup>
-                </Marker>
-              ))}
-            </LayerGroup>
-          </LayersControl.Overlay>
-        </LayersControl>
+            <LayersControl.Overlay checked name="Bathing Water Sites">
+              <LayerGroup>
+                {filteredCoastalLocations?.map((marker: any) => (
+                  <Marker
+                    key={marker.id}
+                    position={[marker.lat, marker.long]}
+                    icon={bathingIcon}
+                  >
+                    <Popup>
+                      <span>
+                        Site Name:{" "}
+                        <span onClick={() => handlePopUpClick(marker.id)}>
+                          {marker.location}
+                        </span>
+                      </span>
 
-        <Marker
-          icon={userIcon}
-          position={[
-            userLocation.coordinates.lat,
-            userLocation.coordinates.lng,
-          ]}
-        ></Marker>
-      </MapContainer>
+                      <span>Description: {marker.locationDescription}</span>
+                    </Popup>
+                  </Marker>
+                ))}
+
+                {filteredInlandLocations?.map((marker: any) => (
+                  <Marker
+                    key={marker.properties.objectid}
+                    position={[
+                      marker.geometry.coordinates[1],
+                      marker.geometry.coordinates[0],
+                    ]}
+                    icon={bathingIcon}
+                  >
+                    <Popup>
+                      <span>
+                        {" "}
+                        Site Name:{" "}
+                        <span
+                          onClick={() =>
+                            handlePopUpClick(marker.properties.objectid)
+                          }
+                        >
+                          {marker.properties.site_name}
+                        </span>
+                      </span>
+
+                      <span>Description: {marker.properties.description}</span>
+                    </Popup>
+                  </Marker>
+                ))}
+              </LayerGroup>
+            </LayersControl.Overlay>
+          </LayersControl>
+
+          <Marker
+            icon={userIcon}
+            position={[
+              userLocation.coordinates.lat,
+              userLocation.coordinates.lng,
+            ]}
+          ></Marker>
+        </MapContainer>
+        <div></div>
+      </section>
+
+      <div></div>
+
     </>
   );
 };

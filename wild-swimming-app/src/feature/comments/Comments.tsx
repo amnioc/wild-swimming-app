@@ -27,23 +27,30 @@ const Comments = () => {
   }
   //map comments
   return (
-   <div>git 
-    <section className={styles.commentForm}>
-      
-    <AddCommentForm  setLocationComments={setLocationComments} locationComments={locationComments}/>
-    </section>
     <section className={styles.commentsSection}>
-      <ul className={styles.commentsList}>
-        {locationComments.map((comment) => {
-          return (
-            <section key={comment._id}>
-              <CommentCard user={user} comment={comment} />
-            </section>
-          );
-        })}
-      </ul>
+      <section className={styles.commentForm}>
+        <AddCommentForm
+          setLocationComments={setLocationComments}
+          locationComments={locationComments}
+        />
+      </section>
+      <section>
+        <ul className={styles.commentsList}>
+          {locationComments.map((comment) => {
+            return (
+              <section key={comment._id}>
+                <CommentCard
+                  user={user}
+                  comment={comment}
+                  setLocationComments={setLocationComments}
+                  locationComments={locationComments}
+                />
+              </section>
+            );
+          })}
+        </ul>
+      </section>
     </section>
-    </div>
   );
 };
 

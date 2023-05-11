@@ -28,8 +28,9 @@ li a {
 } */
 /* 
 .header {
-
+  background-color: var(--dark);
 } */
+
 .logo-hamburger-container {
   display: flex;
 }
@@ -61,34 +62,34 @@ li.search-container {
   align-items: center;
 }
 
-input[type="text"] {
+/* input[type="text"] {
   padding: 10px;
   border: none;
   border-radius: 5px;
   margin-right: 10px;
-}
+} */
 
-button[type="submit"] {
+/* button[type="submit"] {
   padding: 10px;
   background-color: #595959;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
+} */
 
 button[type="submit"]:hover {
   background-color: #3e8e41;
 }
 
 .width-container {
+  height: 14rem;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  background-color: #3d3737;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  background-color: var(--dark);
+  padding: 2rem;
 }
 
 .nav-container {
@@ -110,6 +111,7 @@ button[type="submit"]:hover {
   padding-right: 2rem;
   align-items: center;
   padding-left: 2rem;
+  fill: white;
 }
 .hamburgersvg:hover {
   fill: #92357d;
@@ -149,6 +151,10 @@ button[type="submit"]:hover {
   color: rgb(241, 74, 3);
   text-decoration: none;
 }
+.logo-img {
+  display: block;
+  border-radius: 20px;
+}
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .nav-container {
@@ -157,12 +163,7 @@ button[type="submit"]:hover {
     flex-direction: row;
     padding-left: 80px;
   }
-  .logo-img {
-    display: block;
-    border-radius: 20px;
-  }
   .hamburgericon {
     display: none;
   }
-
 }

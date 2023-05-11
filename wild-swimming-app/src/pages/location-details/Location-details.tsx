@@ -13,6 +13,9 @@ import AddCommentForm from "../../components/add-comment-form/AddCommentForm";
 import { useAuth0 } from "@auth0/auth0-react";
 import Comments from "../../feature/comments/Comments";
 
+import Rating from "../../feature/rating/Rating";
+
+
 type LocationResponseT<T> = {
   location: Array<T>;
 };
@@ -21,6 +24,7 @@ type InlandLocationT = {
   locationDescription: number;
   lat: number;
   long: number;
+  id: string;
 };
 
 const LocationDetails = () => {
@@ -60,9 +64,9 @@ const LocationDetails = () => {
           locationDescription: currentLocation.properties.description,
           lat: currentLocation.geometry.coordinates[1],
           long: currentLocation.geometry.coordinates[0],
+          id: currentLocation.properties.objectid.toString(),
         };
 
-        console.log(formattedLocation);
         setLocation(formattedLocation);
 
         // console.log(data.data.features[0].properties.objectid);
@@ -74,105 +78,105 @@ const LocationDetails = () => {
   }, [sendLocationRequest, id]);
 
   return (
-    <>
-      <section className={styles.Location}>
-        {isError && <span>{errorMsg}</span>}
+    <section className={styles.Location}>
+      {isError && <span>{errorMsg}</span>}
 
-        {isLoading && <span>Loading...</span>}
+      {isLoading && <span>Loading...</span>}
 
-        {!isLoading && !isError && (
-          <>
-            <h2>{location?.name}</h2>
-            {location?.county && (
-              <h4>
-                {location?.county}, {location?.country}
-              </h4>
+      {!isLoading && !isError && (
+        <>
+          <h2>{location?.name}</h2>
+          {location?.county && (
+            <h4>
+              {location?.county}, {location?.country}
+            </h4>
+          )}
+
+          {location?.img && (
+            <div className={styles.ImgBox}>
+              <img
+                className={styles.Img}
+                src={location?.img}
+                alt={`image of ${location?.name} bathing water site`}
+              />
+            </div>
+          )}
+
+          <Rating id={id.id} />
+
+          <section className={styles.DetailsSection}>
+            {location?.LocalAuthority && (
+              <span className={styles.LocalAuthority}>
+                Local Authority: {location?.localAuthority}
+              </span>
             )}
 
-            {location?.img && (
-              <div className={styles.ImgBox}>
-                <img
-                  className={styles.Img}
-                  src={location?.img}
-                  alt={`image of ${location?.name} bathing water site`}
-                />
-              </div>
-            )}
+            <details className={styles.Details}>
+              <summary>About</summary>
+              <p>
+                {location?.locationDescription ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
 
-            <section className={styles.DetailsSection}>
-              {location?.LocalAuthority && (
-                <span className={styles.LocalAuthority}>
-                  Local Authority: {location?.localAuthority}
-                </span>
-              )}
+            <details className={styles.Details}>
+              <summary>Details</summary>
+              <p>
+                {location?.riverDetails || "No information available, sorry!"}
+              </p>
+            </details>
 
-              <details className={styles.Details}>
-                <summary>About</summary>
-                <p>
-                  {location?.locationDescription ||
-                    "No information available, sorry!"}
-                </p>
-              </details>
+            <details className={styles.Details}>
+              <summary>Storm Overflow</summary>
+              <p>
+                {location?.stormOverflowDetails ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
 
-              <details className={styles.Details}>
-                <summary>Details</summary>
-                <p>
-                  {location?.riverDetails || "No information available, sorry!"}
-                </p>
-              </details>
+            <details className={styles.Details}>
+              <summary>Treatment History</summary>
+              <p>
+                {location?.historyDetails || "No information available, sorry!"}
+              </p>
+            </details>
 
-              <details className={styles.Details}>
-                <summary>Storm Overflow</summary>
-                <p>
-                  {location?.stormOverflowDetails ||
-                    "No information available, sorry!"}
-                </p>
-              </details>
+            <details className={styles.Details}>
+              <summary>
+                <div className={styles.Risk_Summary}>
+                  <span>Risk</span>
+                  <span
+                    className={`${styles.Risk_Summary_alert} ${
+                      location?.riskForecast
+                        ? styles.Risk_Summary_alert__true
+                        : styles.Risk_Summary_alert__false
+                    }`}
+                  ></span>
+                </div>
+              </summary>
 
-              <details className={styles.Details}>
-                <summary>Treatment History</summary>
-                <p>
-                  {location?.historyDetails ||
-                    "No information available, sorry!"}
-                </p>
-              </details>
+              <p>
+                {location?.riskForcastDetails ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
 
-              <details className={styles.Details}>
-                <summary>
-                  <div className={styles.Risk_Summary}>
-                    <span>Risk</span>
-                    <span
-                      className={`${styles.Risk_Summary_alert} ${
-                        location?.riskForecast
-                          ? styles.Risk_Summary_alert__true
-                          : styles.Risk_Summary_alert__false
-                      }`}
-                    ></span>
-                  </div>
-                </summary>
+            <details className={styles.Details}>
+              <summary>Visible Pollution</summary>
+              <p>
+                {location?.visiblePollution ||
+                  "No information available, sorry!"}
+              </p>
+            </details>
+          </section>
+        </>
+      )}
 
-                <p>
-                  {location?.riskForcastDetails ||
-                    "No information available, sorry!"}
-                </p>
-              </details>
+      {location && <SiteMap location={location} />}
+      <Comments />
 
-              <details className={styles.Details}>
-                <summary>Visible Pollution</summary>
-                <p>
-                  {location?.visiblePollution ||
-                    "No information available, sorry!"}
-                </p>
-              </details>
-            </section>
-          </>
-        )}
-
-        {location && <SiteMap location={location} />}
-
-        {/*TODO add a comments feature, which holds the comment cards*/}
-      </section>
-    </>
+      {/*TODO add a comments feature, which holds the comment cards*/}
+    </section>
   );
 };
 

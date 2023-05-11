@@ -4,3 +4,90 @@
   padding: 10%;
   margin: 2rem;
 } */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.key_title {
+  font-size: 1.4rem;
+}
+
+.key {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+
+  border: var(--border);
+}
+
+.key_divs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.key_divs p {
+  font-size: 1.4rem;
+}
+
+.key_icons {
+  height: 2rem;
+  width: 2rem;
+}
+
+.postcode_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  padding: 2rem;
+
+  border: var(--border);
+
+  background-color: var(--emphasis);
+}
+
+.postcode_button {
+  height: 4rem;
+  width: 8rem;
+
+  background-color: var(--dark);
+  color: var(--highlight);
+
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.postcode_search {
+  border: var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.findme_button {
+  height: 4rem;
+  width: 10rem;
+
+  background-color: var(--emphasis);
+  color: var(--dark);
+
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  font-size: 1.4rem;
+
+  border: var(--border);
+}

@@ -10,7 +10,6 @@ const Header = () => {
   const { user, isAuthenticated } = useAuth0();
   const [isHamOpen, setIsHamOpen] = useState(false);
 
-
   // if (isLoading) {
   //   return <div>Loading ...</div>;
   // }
@@ -57,11 +56,6 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/account" className="ham-listitem">
-                  Account
-                </Link>
-              </li>
-              <li>
                 <Link to="/contact" className="ham-listitem">
                   Contact Us
                 </Link>
@@ -88,11 +82,6 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/account" className="nav-listitem">
-                  Account
-                </Link>
-              </li>
-              <li>
                 <Link to="/contact" className="nav-listitem">
                   Contact Us
                 </Link>
@@ -111,12 +100,6 @@ const Header = () => {
           </nav>
         </div>
         <div className="search-container">
-          <form>
-            <input type="text" placeholder="Search..." />
-
-            <button type="submit">Search</button>
-          </form>
-
           {!isAuthenticated && <LoginButton />}
           {isAuthenticated && <LogoutButton />}
         </div>
@@ -130,6 +113,7 @@ const Header = () => {
       )}
     </div>
   );
+  console.log(user);
 };
 
 export default Header;
