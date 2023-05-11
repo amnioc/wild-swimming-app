@@ -6,6 +6,7 @@
   gap: 1rem;
 
   padding: 2rem;
+  background-color: var(--highlight);
 }
 
 .DetailsSection {
@@ -28,7 +29,7 @@
 
   border: var(--border);
 
-  filter: drop-shadow(10px 9px 0px var(--primary-theme-color));
+  filter: drop-shadow(7px 6px 0px var(--alternate));
 }
 
 .Img {
@@ -52,7 +53,9 @@
 }
 
 details {
-  background-color: var(--primary-theme-color);
+  background-color: var(--mid);
+  color: var(--highlight);
+  filter: drop-shadow(7px 6px 0px var(--alternate));
 }
 
 p {

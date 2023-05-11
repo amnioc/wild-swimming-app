@@ -13,7 +13,6 @@ import styles from "./map.module.css";
 import { useState, useRef, useEffect, SetStateAction } from "react";
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import CanvasMarkersLayer from "react-leaflet-canvas-markers";
 
 import userGeoLocation from "./utils/getUserLocation";
 import { checkValidPostocde, fetchPostCode } from "./utils/fetchPostCode";
@@ -93,10 +92,10 @@ const MapListener = ({
   useEffect(() => {
     map.setView(
       {
-        lat: 51.5095146286,
-        lng: -0.1244828354,
+        lat: 53.483959,
+        lng: -2.244644,
       },
-      14
+      11
     );
   }, []);
 
@@ -158,26 +157,6 @@ const Map = () => {
 
   //Postcode
 
-
-  // const [postcode, setPostcodeList] = useState();
-  // const postcodeLocation = fetchPostCode(postcode);
-
-  // const handleSubmit = (event: any) => {
-  //   event.preventDefault();
-  //   fetchPostCode(postcode).then((postcodeLocation) => {
-  //     if (postcodeLocation.loaded) {
-  //       mapRef.current.flyTo(
-  //         [postcodeLocation.coordinates.lat, postcodeLocation.coordinates.lng],
-  //         ZOOM_LEVEL,
-  //         { animate: true }
-  //       );
-  //     }
-  //   });
-  // };
-
-  // }if (isPostcodeValid === false ){
-  //   setMessage("Postcode can not be found, Please enter a valid Postocde")
-  // }
   const [err, setErr] = useState(false);
   const [message, setMessage] = useState("");
   const [isPostcodeValid, setIsPostcodeValid] = useState(false);
@@ -196,7 +175,6 @@ const Map = () => {
         return;
       }
 
-
       fetchPostCode(postcode).then((currentPostcode) => {
         if (currentPostcode.loaded) {
           mapRef.current.flyTo(
@@ -206,7 +184,6 @@ const Map = () => {
           );
         }
       });
-
     });
 
     setErr(false);
@@ -221,111 +198,8 @@ const Map = () => {
 
   return (
     <>
-      <h1> Map goes here</h1>
-
       <div>
-        <MapContainer
-          center={center}
-          zoom={ZOOM_LEVEL}
-          scrollWheelZoom={false}
-          ref={mapRef}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-            url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
-          />
-
-          <MapListener
-            setFilteredInlandLocations={setFilteredInlandLocations}
-            setFilteredCoastalLocations={setFilteredCoastalLocations}
-            setFilteredSewageLocations={setFilteredSewageLocations}
-          />
-          <LayersControl postion="topright">
-            <LayersControl.Overlay checked name="Storm Overflow 2022">
-              <MarkerClusterGroup disableClusteringAtZoom={14}>
-                {filteredSewageLocations.map((marker: any) => (
-                  <Marker
-                    key={marker.properties.OBJECTID}
-                    position={[
-                      marker.geometry.coordinates[1],
-                      marker.geometry.coordinates[0],
-                    ]}
-                    icon={markerIcon}
-                  >
-                    <Popup>
-                      <span>
-                        Water Company: {marker.properties.waterCompanyName}
-                      </span>
-                      <span>
-                        Storm Overflow Duration:{" "}
-                        {marker.properties.totalDurationAllSpillsHrs} hours
-                      </span>
-                    </Popup>
-                  </Marker>
-                ))}
-              </MarkerClusterGroup>
-            </LayersControl.Overlay>
-
-            <LayersControl.Overlay checked name="Bathing Water Sites">
-              <LayerGroup>
-                {filteredCoastalLocations?.map((marker: any) => (
-                  <Marker
-                    key={marker.id}
-                    position={[marker.lat, marker.long]}
-                    icon={bathingIcon}
-                  >
-                    <Popup>
-                      <span>
-                        Site Name:{" "}
-                        <span onClick={() => handlePopUpClick(marker.id)}>
-                          {marker.location}
-                        </span>
-                      </span>
-
-                      <span>Description: {marker.locationDescription}</span>
-                    </Popup>
-                  </Marker>
-                ))}
-
-                {filteredInlandLocations?.map((marker: any) => (
-                  <Marker
-                    key={marker.properties.objectid}
-                    position={[
-                      marker.geometry.coordinates[1],
-                      marker.geometry.coordinates[0],
-                    ]}
-                    icon={bathingIcon}
-                  >
-                    <Popup>
-                      <span>
-                        {" "}
-                        Site Name:{" "}
-                        <span
-                          onClick={() =>
-                            handlePopUpClick(marker.properties.objectid)
-                          }
-                        >
-                          {marker.properties.site_name}
-                        </span>
-                      </span>
-
-                      <span>Description: {marker.properties.description}</span>
-                    </Popup>
-                  </Marker>
-                ))}
-              </LayerGroup>
-            </LayersControl.Overlay>
-          </LayersControl>
-
-          <Marker
-            icon={userIcon}
-            position={[
-              userLocation.coordinates.lat,
-              userLocation.coordinates.lng,
-            ]}
-          ></Marker>
-        </MapContainer>
-        <div>
+        <div className="locateButton">
           <button onClick={showMyLocation}>Locate Me</button>
         </div>
       </div>
@@ -348,9 +222,108 @@ const Map = () => {
           </button>
 
           {err ? <p>{message}</p> : null}
-
         </form>
       </div>
+
+      <MapContainer
+        center={center}
+        zoom={ZOOM_LEVEL}
+        scrollWheelZoom={false}
+        ref={mapRef}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
+        />
+
+        <MapListener
+          setFilteredInlandLocations={setFilteredInlandLocations}
+          setFilteredCoastalLocations={setFilteredCoastalLocations}
+          setFilteredSewageLocations={setFilteredSewageLocations}
+        />
+        <LayersControl postion="topright">
+          <LayersControl.Overlay checked name="Storm Overflow 2022">
+            <MarkerClusterGroup disableClusteringAtZoom={14}>
+              {filteredSewageLocations.map((marker: any) => (
+                <Marker
+                  key={marker.properties.OBJECTID}
+                  position={[
+                    marker.geometry.coordinates[1],
+                    marker.geometry.coordinates[0],
+                  ]}
+                  icon={markerIcon}
+                >
+                  <Popup>
+                    <span>
+                      Water Company: {marker.properties.waterCompanyName}
+                    </span>
+                    <span>
+                      Storm Overflow Duration:{" "}
+                      {marker.properties.totalDurationAllSpillsHrs} hours
+                    </span>
+                  </Popup>
+                </Marker>
+              ))}
+            </MarkerClusterGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay checked name="Bathing Water Sites">
+            <LayerGroup>
+              {filteredCoastalLocations?.map((marker: any) => (
+                <Marker
+                  key={marker.id}
+                  position={[marker.lat, marker.long]}
+                  icon={bathingIcon}
+                >
+                  <Popup>
+                    <span>
+                      <span onClick={() => handlePopUpClick(marker.id)}>
+                        {marker.location}
+                      </span>
+                    </span>
+
+                    <span>Description: {marker.locationDescription}</span>
+                  </Popup>
+                </Marker>
+              ))}
+
+              {filteredInlandLocations?.map((marker: any) => (
+                <Marker
+                  key={marker.properties.objectid}
+                  position={[
+                    marker.geometry.coordinates[1],
+                    marker.geometry.coordinates[0],
+                  ]}
+                  icon={bathingIcon}
+                >
+                  <Popup>
+                    <span>
+                      {" "}
+                      <span
+                        onClick={() =>
+                          handlePopUpClick(marker.properties.objectid)
+                        }
+                      >
+                        {marker.properties.site_name}
+                      </span>
+                    </span>
+
+                    <span>Info: {marker.properties.description}</span>
+                  </Popup>
+                </Marker>
+              ))}
+            </LayerGroup>
+          </LayersControl.Overlay>
+        </LayersControl>
+
+        <Marker
+          icon={userIcon}
+          position={[
+            userLocation.coordinates.lat,
+            userLocation.coordinates.lng,
+          ]}
+        ></Marker>
+      </MapContainer>
     </>
   );
 };

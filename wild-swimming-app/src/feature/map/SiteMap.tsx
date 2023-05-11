@@ -17,7 +17,6 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import { markerIcon, bathingIcon } from "./mapIcons";
 import stormOverflow2022 from "./Data/stormOverflow2022.json";
 import useBathingWaterRequest from "../../hooks/useBathingWaterRequest";
-import { useNavigate } from "react-router";
 
 type Props = {
   setFilteredSewageLocations: Function;
@@ -36,7 +35,10 @@ const MapListener = ({ setFilteredSewageLocations }: Props) => {
 
   useEffect(() => {
     const filteredSewage = stormOverflow2022.filter(
-      (mark: any) => mark.geometry !== null
+      (mark: any) =>
+        mark.geometry !== null &&
+        mark.properties.totalDurationAllSpillsHrs !== null &&
+        mark.properties.totalDurationAllSpillsHrs !== 0
     );
 
     const recentFilteredSewage = filteredSewage?.filter((location) =>
@@ -61,7 +63,7 @@ const SiteMap = (location) => {
     lng: location.location.long,
   });
 
-  const ZOOM_LEVEL = 14;
+  const ZOOM_LEVEL = 15;
   const mapRef = useRef();
 
   const [filteredSewageLocations, setFilteredSewageLocations] = useState([]);
@@ -99,7 +101,7 @@ const SiteMap = (location) => {
                   >
                     <Popup>
                       <span>
-                        Storm Overflow Duration:
+                        Storm Overflow Duration:{" "}
                         {marker.properties.totalDurationAllSpillsHrs} hours
                       </span>
                     </Popup>
